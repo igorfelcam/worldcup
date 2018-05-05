@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBestGroupsTable extends Migration
+class CreateBetsGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,8 @@ class CreateBestGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('best_groups', function (Blueprint $table) {
+        //
+        Schema::create('bets_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_create_id');
             $table->string('name');
@@ -28,6 +29,6 @@ class CreateBestGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('best_groups');
+        Schema::dropIfExists('bets_groups');
     }
 }
