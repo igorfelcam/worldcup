@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Página Home</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -14,7 +14,15 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @foreach ( $bet_groups as $bet_group )
+                        {{-- list groups --}}
+                        <p>{{ $bet_group->name }}</p>
+                    @endforeach
+
+                    <a class="btn btn-link" href="{{ route('cbg') }}">
+                        Criar grupo de apostas
+                    </a>
+
                 </div>
             </div>
         </div>
