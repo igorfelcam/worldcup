@@ -24,7 +24,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create bets group
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,9 +32,8 @@ class GroupController extends Controller
     {
         //
         $user = auth()->user();
-        $name_bet_group = $request->input('namegroup');
+        $name_bet_group = $request->input( 'namegroup' );
 
-        // $bet_group = $this->user;
         $bet_group = DB::table( 'bets_groups' )
                         ->where([
                             [ 'user_create_id', '=', $user->id ],
@@ -49,8 +48,21 @@ class GroupController extends Controller
                     'user_create_id'    => $user->id,
                     'name'              => $name_bet_group
                 ]);
+            // relationship to betting groups created with the creator user
+            $bet_group_id = DB::table( 'bets_groups' )
+                                ->select( 'id' )
+                                ->where([
+                                    [ 'user_create_id', '=', $user->id ],
+                                    [ 'name', '=', $name_bet_group ]
+                                ])
+                                ->get();
+            // inserts relationship
+            DB::table( 'user_bets_groups' )
+                ->insert([
+                    'user_id'       => $user->id,
+                    'bets_group_id' => $bet_group_id[0]->id
+                ]);
         }
-
         // select bet groups
         $bet_groups = DB::table( 'bets_groups' )
                         ->select( 'name' )
@@ -61,14 +73,22 @@ class GroupController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * search bets group
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function search( $name )
     {
-        //
+        // get bet group searched
+        $response = DB::table( 'bets_groups' )
+                        ->select( 'name' )
+                        ->where( 'name', 'LIKE', '%'.$name.'%' )
+                        ->paginate( 20 );
+
+        return response()->json([
+            'groups' => $response
+        ]);
     }
 
     /**
