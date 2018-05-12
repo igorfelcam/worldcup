@@ -14,8 +14,13 @@
                 <p>
                     {{ group.name }}
                     <span>
-                        <a>Enviar convite</a>
-                        <a>Sair do grupo</a>
+                        <a>
+                            <span v-if="user_id == group.user_create_id">Convidar amigos</span>
+                            <span v-else v-on:click="askInvite( group.id )">Solicitar convite</span>
+                        </a>
+                        <a>
+                            <span v-if="user_id != group.user_create_id">Sair do grupo</span>
+                        </a>
                     </span>
                 </p>
             </div>
@@ -36,7 +41,8 @@ export default {
         return {
             response: {},
             group: '',
-            results_groups: []
+            results_groups: [],
+            user_id: false
         }
     },
     methods: {
@@ -46,15 +52,30 @@ export default {
             if ( this.group.length > 0 ) {
                 Vue.axios.get( '/api/search/' + this.group )
                     .then( response => {
-                        // console.log( response.data.groups.data );
+
+                        console.log( response.data.user_groups.data ); // groups user for list status
+
                         this.results_groups = response.data.groups.data
+                        this.user_id = response.data.user
                     })
                     .catch( e => {
-                        console.log( e )
+                        console.log( "Error: " + e )
                     })
             }
             else {
                 this.results_groups = null
+            }
+        },
+        askInvite ( group_id ) {
+            // console.log( "here man!" + this.user_id + " group " + group_id );
+            if ( this.user_id ) {
+                Vue.axios.get( '/api/askinvite/' + group_id + '/' + this.user_id )
+                    .then( response => {
+                        console.log( 'sent invite' )
+                    })
+                    .catch( e => {
+                        console.log( "Error: " + e )
+                    })
             }
         }
     }

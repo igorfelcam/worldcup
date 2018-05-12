@@ -10,17 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('auth.login');
+Route::get( '/', function () {
+    return view( 'auth.login' );
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // create bet group
-Route::get('/cbg', 'GroupController@index')->name('cbg');
-Route::post('/cbg', 'GroupController@create')->name('cbg');
+Route::get( '/cbg', 'GroupController@index' )->name( 'cbg' );
+Route::post( '/cbg', 'GroupController@create' )->name( 'cbg' );
 // search bet groups
-Route::get('api/search/{name}', 'GroupController@search');
+Route::get( 'api/search/{name}', 'GroupController@search' )->name( 'search' );
+// ask invite
+Route::get( 'api/askinvite/{group_id}/{user_id}', 'GroupController@askInvite' )->name( 'askinvite' );

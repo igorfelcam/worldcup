@@ -80,15 +80,50 @@ class GroupController extends Controller
      */
     public function search( $name )
     {
+        $user = auth()->user();
         // get bet group searched
         $response = DB::table( 'bets_groups' )
-                        ->select( 'name' )
+                        ->select( 'id', 'name', 'user_create_id' )
                         ->where( 'name', 'LIKE', '%'.$name.'%' )
-                        ->paginate( 20 );
+                        ->paginate( 50 );
+
+        $user_groups = DB::table( 'user_bets_groups' )
+                            ->select( 'user_id', 'bets_group_id' )
+                            ->where( 'user_id', '=', $user->id )
+                            ->paginate( 50 );  // groups user for list status********
 
         return response()->json([
-            'groups' => $response
+            'groups'        => $response,
+            'user'          => $user,
+            'user_groups'   => $user_groups
         ]);
+    }
+
+    /*
+     * ask invite
+    */
+    public function askInvite( $group_id, $user_id )
+    {
+        // valid user
+        $auth = auth()->id();
+        if ( $user_id == $auth ) {
+            // verify if user already sent invitation
+            $exist = DB::table( 'invitations' )
+                            ->where([
+                                [ 'user_id', '=', $user_id ],
+                                [ 'bets_group_id', '=', $group_id ],
+                                [ 'notify', '=', true ]
+                            ])
+                            ->exists();
+            if ( !$exist ) {
+                // inser invit for user auth
+                DB::table( 'invitations' )
+                    ->insert([
+                        'user_id' => auth()->id(), 'bets_group_id' => $group_id, 'notify' => true
+                    ]);
+            }
+        }
+        return;
     }
 
     /**
