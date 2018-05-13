@@ -23,4 +23,4 @@ Route::post( '/cbg', 'GroupController@create' )->name( 'cbg' );
 // search bet groups
 Route::get( 'api/search/{name}', 'GroupController@search' )->name( 'search' );
 // ask invite
-Route::get( 'api/askinvite/{group_id}/{user_id}', 'GroupController@askInvite' )->name( 'askinvite' );
+Route::get( 'api/enterGroup/{group_id}/{user_id}', 'GroupController@enterGroup' )->name( 'enterGroup' );

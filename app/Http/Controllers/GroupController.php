@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use DB;
 
 class GroupController extends Controller
@@ -82,27 +83,42 @@ class GroupController extends Controller
     {
         $user = auth()->user();
         // get bet group searched
-        $response = DB::table( 'bets_groups' )
-                        ->select( 'id', 'name', 'user_create_id' )
-                        ->where( 'name', 'LIKE', '%'.$name.'%' )
+        $response = DB::table( 'bets_groups as btg' )
+                        ->select(
+                            'btg.id as group_id', 'btg.name as group_name', 'btg.user_create_id as user_create',
+                            'inv.user_id as user_invite',
+                            DB::raw( 'case
+                        		when inv.notify is null then 9
+                        		else inv.notify
+                        	end as status_invite' ),
+                        	DB::raw( 'case
+                        		when ubg.user_id is null then 0
+                        		else 1
+                        	end as user_participates' )
+                        )
+                        ->leftJoin( 'invitations as inv', function( $join ){
+                            $join->on( 'btg.id', '=', 'inv.bets_group_id' );
+                            $join->on( DB::raw( Auth::user()->id ), '=', 'inv.user_id' );
+                            // $join->on( $aux, '=', 'inv.user_id' );
+                        })
+                        ->leftJoin( 'user_bets_groups as ubg', function( $join ){
+                            $join->on( 'btg.id', '=', 'ubg.bets_group_id' );
+                            $join->on( DB::raw( Auth::user()->id ), '=', 'ubg.user_id' );
+                            // $join->on( $aux, '=', 'ubg.user_id' );  // ************ erro aqui na hora da consulta sql, ajustar
+                        })
+                        ->where( 'btg.name', 'LIKE', '%'.$name.'%' )
                         ->paginate( 50 );
-
-        $user_groups = DB::table( 'user_bets_groups' )
-                            ->select( 'user_id', 'bets_group_id' )
-                            ->where( 'user_id', '=', $user->id )
-                            ->paginate( 50 );  // groups user for list status********
 
         return response()->json([
             'groups'        => $response,
-            'user'          => $user,
-            'user_groups'   => $user_groups
+            'user'          => $user
         ]);
     }
 
     /*
      * ask invite
     */
-    public function askInvite( $group_id, $user_id )
+    public function enterGroup( $group_id, $user_id )
     {
         // valid user
         $auth = auth()->id();

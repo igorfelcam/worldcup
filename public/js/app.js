@@ -43136,7 +43136,7 @@ exports = module.exports = __webpack_require__(41)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43636,6 +43636,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -43661,11 +43675,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
             // console.log(this.group);
             if (this.group.length > 0) {
                 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/search/' + this.group).then(function (response) {
-
-                    console.log(response.data.user_groups.data); // groups user for list status
-
+                    // groups
                     _this.results_groups = response.data.groups.data;
-                    _this.user_id = response.data.user;
+                    // user id
+                    _this.user_id = response.data.user.id;
+
+                    console.log(response.data.groups.data);
                 }).catch(function (e) {
                     console.log("Error: " + e);
                 });
@@ -43673,11 +43688,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
                 this.results_groups = null;
             }
         },
-        askInvite: function askInvite(group_id) {
+        enterGroup: function enterGroup(group_id) {
             // console.log( "here man!" + this.user_id + " group " + group_id );
             if (this.user_id) {
-                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/askinvite/' + group_id + '/' + this.user_id).then(function (response) {
-                    console.log('sent invite');
+                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/enterGroup/' + group_id + '/' + this.user_id).then(function (response) {
+                    console.log('Solicited enter group');
                 }).catch(function (e) {
                     console.log("Error: " + e);
                 });
@@ -43739,31 +43754,32 @@ var render = function() {
               _c("p", [
                 _vm._v(
                   "\n                " +
-                    _vm._s(group.name) +
+                    _vm._s(group.group_name) +
                     "\n                "
                 ),
                 _c("span", [
-                  _c("a", [
-                    _vm.user_id == group.user_create_id
-                      ? _c("span", [_vm._v("Convidar amigos")])
-                      : _c(
-                          "span",
+                  _vm.user_id == group.user_create
+                    ? _c("a", [_c("span", [_vm._v("Convidar amigos")])])
+                    : group.user_participates == false &&
+                      group.status_invite == false
+                      ? _c(
+                          "a",
                           {
                             on: {
                               click: function($event) {
-                                _vm.askInvite(group.id)
+                                _vm.enterGroup(group.group_id)
                               }
                             }
                           },
-                          [_vm._v("Solicitar convite")]
+                          [_c("span", [_vm._v("Entrar")])]
                         )
-                  ]),
-                  _vm._v(" "),
-                  _c("a", [
-                    _vm.user_id != group.user_create_id
-                      ? _c("span", [_vm._v("Sair do grupo")])
-                      : _vm._e()
-                  ])
+                      : group.user_participates == false &&
+                        group.status_invite == true
+                        ? _c("a", [_c("span", [_vm._v("Solicitado")])])
+                        : group.user_participates == true &&
+                          _vm.user_id != group.user_create
+                          ? _c("a", [_c("span", [_vm._v("Sair")])])
+                          : _vm._e()
                 ])
               ])
             ])
