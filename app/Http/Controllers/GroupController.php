@@ -82,37 +82,33 @@ class GroupController extends Controller
     public function search( $name )
     {
         $user = auth()->user();
+
         // get bet group searched
-        $response = DB::table( 'bets_groups as btg' )
+        $response = DB::table( 'bets_groups as bg' )
                         ->select(
-                            'btg.id as group_id', 'btg.name as group_name', 'btg.user_create_id as user_create',
-                            'inv.user_id as user_invite',
-                            DB::raw( 'case
-                        		when inv.notify is null then 9
-                        		else inv.notify
-                        	end as status_invite' ),
-                        	DB::raw( 'case
-                        		when ubg.user_id is null then 0
-                        		else 1
-                        	end as user_participates' )
+                            'bg.id as group_id',
+                            'bg.name as group_name',
+                            'bg.user_create_id as user_create',
+                            DB::raw( 'case when ubg.bets_group_id = bg.id then 1 else 0 end as  user_participe' ),
+                            DB::raw( 'case when inv.bets_group_id = bg.id then 1 else 0 end as user_invite' )
                         )
-                        ->leftJoin( 'invitations as inv', function( $join ){
-                            $join->on( 'btg.id', '=', 'inv.bets_group_id' );
-                            $join->on( DB::raw( Auth::user()->id ), '=', 'inv.user_id' );
-                            // $join->on( $aux, '=', 'inv.user_id' );
-                        })
                         ->leftJoin( 'user_bets_groups as ubg', function( $join ){
-                            $join->on( 'btg.id', '=', 'ubg.bets_group_id' );
-                            $join->on( DB::raw( Auth::user()->id ), '=', 'ubg.user_id' );
-                            // $join->on( $aux, '=', 'ubg.user_id' );  // ************ erro aqui na hora da consulta sql, ajustar
+                            $join->on( 'ubg.bets_group_id', '=', 'bg.id' );
+                            $join->on( 'ubg.user_id', '=', DB::raw( Auth::user()->id ) );
                         })
-                        ->where( 'btg.name', 'LIKE', '%'.$name.'%' )
+                        ->leftJoin( 'invitations as inv', function( $join ){
+                            $join->on( 'inv.bets_group_id', '=', 'bg.id' );
+                            $join->on( 'inv.user_id', '=', DB::raw( Auth::user()->id ) );
+                            $join->on( 'inv.notify', '=', DB::raw( '1' ) );
+                        })
+                        ->where( 'bg.name', 'LIKE', '%'.$name.'%' )
                         ->paginate( 50 );
 
         return response()->json([
             'groups'        => $response,
             'user'          => $user
         ]);
+
     }
 
     /*
@@ -137,6 +133,36 @@ class GroupController extends Controller
                     ->insert([
                         'user_id' => auth()->id(), 'bets_group_id' => $group_id, 'notify' => true
                     ]);
+            }
+        }
+        return;
+    }
+
+    /*
+     * exit group
+    */
+    public function exitGroup( $group_id, $user_id )
+    {
+        // valid user
+        $auth = auth()->id();
+        if ( $user_id == $auth ) {
+        //     // verify if user already sent invitation
+            $exist = DB::table( 'user_bets_groups as ubg' )
+                            ->where([
+                                [ 'ubg.user_id', '=', $user_id ],
+                                [ 'ubg.bets_group_id', '=', $group_id ],
+                                [ 'bg.user_create_id', '<>', $user_id ]
+                            ])
+                            ->join( 'bets_groups as bg', 'ubg.bets_group_id', '=', 'bg.id' )
+                            ->exists();
+            if ( $exist ) {
+                // delete invit for user auth
+                DB::table( 'user_bets_groups' )
+                            ->where([
+                                [ 'user_id', '=', $user_id ],
+                                [ 'bets_group_id', '=', $group_id ]
+                            ])
+                            ->delete();
             }
         }
         return;

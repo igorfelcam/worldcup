@@ -43136,7 +43136,7 @@ exports = module.exports = __webpack_require__(41)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43646,10 +43646,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -43679,8 +43675,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
                     _this.results_groups = response.data.groups.data;
                     // user id
                     _this.user_id = response.data.user.id;
-
-                    console.log(response.data.groups.data);
+                    // console.log( response.data.groups.data ) // todos os grupos
+                    // console.log( response.data.user.id ) // usuário
                 }).catch(function (e) {
                     console.log("Error: " + e);
                 });
@@ -43693,6 +43689,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
             if (this.user_id) {
                 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/enterGroup/' + group_id + '/' + this.user_id).then(function (response) {
                     console.log('Solicited enter group');
+                }).catch(function (e) {
+                    console.log("Error: " + e);
+                });
+            }
+        },
+        exitGroup: function exitGroup(group_id) {
+            // console.log( "here" + group_id );
+            if (this.user_id) {
+                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/exitGroup/' + group_id + '/' + this.user_id).then(function (response) {
+                    console.log('Exit group sucess');
                 }).catch(function (e) {
                     console.log("Error: " + e);
                 });
@@ -43760,8 +43766,8 @@ var render = function() {
                 _c("span", [
                   _vm.user_id == group.user_create
                     ? _c("a", [_c("span", [_vm._v("Convidar amigos")])])
-                    : group.user_participates == false &&
-                      group.status_invite == false
+                    : group.user_participe == false &&
+                      group.user_invite == false
                       ? _c(
                           "a",
                           {
@@ -43773,12 +43779,22 @@ var render = function() {
                           },
                           [_c("span", [_vm._v("Entrar")])]
                         )
-                      : group.user_participates == false &&
-                        group.status_invite == true
+                      : group.user_participe == false &&
+                        group.user_invite == true
                         ? _c("a", [_c("span", [_vm._v("Solicitado")])])
-                        : group.user_participates == true &&
+                        : group.user_participe == true &&
                           _vm.user_id != group.user_create
-                          ? _c("a", [_c("span", [_vm._v("Sair")])])
+                          ? _c(
+                              "a",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.exitGroup(group.group_id)
+                                  }
+                                }
+                              },
+                              [_c("span", [_vm._v("Sair")])]
+                            )
                           : _vm._e()
                 ])
               ])

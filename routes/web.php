@@ -22,5 +22,7 @@ Route::get( '/cbg', 'GroupController@index' )->name( 'cbg' );
 Route::post( '/cbg', 'GroupController@create' )->name( 'cbg' );
 // search bet groups
 Route::get( 'api/search/{name}', 'GroupController@search' )->name( 'search' );
-// ask invite
+// ask invit enter bet group
 Route::get( 'api/enterGroup/{group_id}/{user_id}', 'GroupController@enterGroup' )->name( 'enterGroup' );
+// exit bet group
+Route::get( 'api/exitGroup/{group_id}/{user_id}', 'GroupController@exitGroup' )->name( 'exitGroup' );
