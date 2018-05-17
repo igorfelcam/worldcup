@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBetsTable extends Migration
+class CreateTypeMatchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateBetsTable extends Migration
      */
     public function up()
     {
-        Schema::create( 'bets', function ( Blueprint $table ) {
+        Schema::create( 'type_matches', function ( Blueprint $table ) {
             $table->increments( 'id' );
-            $table->integer( 'user_id' );
-            $table->integer( 'matches_soccer_id' );
-            $table->integer( 'first_team_goals' );
-            $table->integer( 'second_team_goals' );
-            $table->integer( 'score' );
-            $table->date( 'limit_date' );
+            $table->string( 'name' );
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateBetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists( 'bets' );
+        Schema::dropIfExists( 'type_matches' );
     }
 }

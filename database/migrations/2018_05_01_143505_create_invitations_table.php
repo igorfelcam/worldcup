@@ -13,11 +13,11 @@ class CreateInvitationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('invitations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('bets_group_id');
-            $table->boolean('notify');
+        Schema::create( 'invitations', function ( Blueprint $table ) {
+            $table->increments( 'id' );
+            $table->integer( 'user_id' );
+            $table->integer( 'bets_group_id' );
+            $table->boolean( 'notify' );
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateInvitationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invitations');
+        Schema::dropIfExists( 'invitations' );
     }
 }

@@ -13,13 +13,14 @@ class CreateMatchesSoccersTable extends Migration
      */
     public function up()
     {
-        Schema::create('matches_soccers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('first_team_id');
-            $table->integer('second_team_id');
-            $table->integer('first_team_goals');
-            $table->integer('second_team_goals');
-            $table->date('match_date');
+        Schema::create( 'matches_soccers', function ( Blueprint $table ) {
+            $table->increments( 'id' );
+            $table->string( 'type_match_id' );
+            $table->integer( 'first_team_id' )->nullable();
+            $table->integer( 'second_team_id' )->nullable();
+            $table->integer( 'first_team_goals' )->nullable();
+            $table->integer( 'second_team_goals' )->nullable();
+            $table->dateTime( 'match_date' );
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateMatchesSoccersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matches_soccers');
+        Schema::dropIfExists( 'matches_soccers' );
     }
 }

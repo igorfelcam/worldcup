@@ -13,10 +13,10 @@ class CreateUserBetsGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_bets_groups', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('bets_group_id');
+        Schema::create( 'user_bets_groups', function ( Blueprint $table ) {
+            $table->increments( 'id' );
+            $table->integer( 'user_id' );
+            $table->integer( 'bets_group_id' );
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateUserBetsGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_bets_groups');
+        Schema::dropIfExists( 'user_bets_groups' );
     }
 }

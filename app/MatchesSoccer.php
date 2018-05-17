@@ -8,6 +8,7 @@ class MatchesSoccers extends Model
 {
     //
     protected $fillable = [
+        'type_match_id',
         'first_team_id',
         'second_team_id',
         'first_team_goals',
@@ -23,5 +24,10 @@ class MatchesSoccers extends Model
     public function bets()
     {
         return $this->hasMany('App\Bet');
+    }
+
+    public function type_matches()
+    {
+        return $this->hasOne('App\TypeMatches');
     }
 }
