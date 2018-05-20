@@ -8,7 +8,81 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+.select {
+    cursor: pointer;
+}
+
 // menu
 .padding-img {
     padding: 11px 0 11px 11px;
+}
+.nav-items-new {
+    position: absolute;
+    height: 25px;
+    min-height: 50px;
+    display: inline-flex;
+    right: 1em;
+}
+.nav-items-new a {
+    display: inline-flex;
+    align-items: center;
+}
+
+// show menu
+.menu-select {
+    position: fixed;
+    right: 1em;
+    min-height: 50px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    align-items: center;
+    color: $laravel-border-color;
+}
+.menu-icon {
+    height: 38px;
+    font-size: 20px;
+    padding: 2.5px 12px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid $laravel-border-color;
+}
+.sidenav {
+    z-index: 99;
+    position: fixed;
+    height: 100%;
+    width: 0;
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    background-color: #840000f5;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+.sidenav a {
+    padding: 0.4em 1em;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+.sidenav .closebtn {
+    position: absolute;
+    padding: 0.5em 1em;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+}
+@media screen and (max-height: 450px) {
+  // .sidenav { padding-top: 15px; }
+  // .sidenav a { font-size: 18px; }
+}
+.show {
+    width: 100vw;
 }

@@ -19,5 +19,13 @@ window.Vue = require('vue');
 Vue.component('betsgroups', require('./components/BetsGroups.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        showNow: false
+    },
+    methods: {
+        showMenu: function () {
+            this.showNow = !this.showNow
+        }
+    }
 });

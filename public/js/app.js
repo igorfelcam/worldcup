@@ -11963,7 +11963,15 @@ window.Vue = __webpack_require__(10);
 Vue.component('betsgroups', __webpack_require__(38));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app',
+    data: {
+        showNow: false
+    },
+    methods: {
+        showMenu: function showMenu() {
+            this.showNow = !this.showNow;
+        }
+    }
 });
 
 /***/ }),
