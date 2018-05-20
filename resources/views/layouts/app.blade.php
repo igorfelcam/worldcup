@@ -7,7 +7,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', '') }}</title>
 
     <!-- Styles -->
@@ -21,12 +20,15 @@
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="sr-only"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
 
+                    <span class="navbar-brand padding-img">
+                        <img height="28" src="{{ url('img/ico-worldcup.png') }}" alt="">
+                    </span>
                     <!-- Branding Image -->
                     @if ( Auth::guest() )
                         <a class="navbar-brand" href="{{ url('/') }}">

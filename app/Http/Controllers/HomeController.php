@@ -25,14 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        // verify if have a bet group
-        $exist_bet_group = DB::table( 'bets_groups' )
-                                ->where( 'user_create_id', '=', $user->id )
-                                ->exists();
-
-        // if have bet group
-        if ( $exist_bet_group ) {
+        // verify if wanna look create group
+        if ( $user->view_create_group ) {
+            return view( 'create_bet_group' );
+        }
+        else {
             // select bet groups
             $bet_groups = DB::table( 'bets_groups' )
                             ->select( 'name' )
@@ -41,8 +38,17 @@ class HomeController extends Controller
 
             return view( 'home' )->with( 'bet_groups', $bet_groups );
         }
-        else {
-            return view( 'create_bet_group' );
-        }
+    }
+    /*
+     * set fallse in view group
+    */
+    public function notViewCreateGroup()
+    {
+        // set false in view create group
+        DB::table( 'users' )
+            ->where( 'id', auth()->user()->id )
+            ->update([ 'view_create_group' => false ]);
+
+        return $this->index();
     }
 }

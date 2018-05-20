@@ -6,7 +6,6 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Criar grupo de apostas</div>
-
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('cbg') }}">
                         {{ csrf_field() }}
@@ -34,6 +33,14 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="panel-footer">
+                    <div class="text-right">
+                        {{-- to be continue --}}
+                        <a href="{{ route('notGroup') }}">...ou criar grupo depois</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

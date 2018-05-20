@@ -17,6 +17,8 @@ Route::get( '/', function () {
 Auth::routes();
 
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
+// false view create group
+Route::get( '/notGroup', 'HomeController@notViewCreateGroup' )->name( 'notGroup' );
 // create bet group
 Route::get( '/cbg', 'GroupController@index' )->name( 'cbg' );
 Route::post( '/cbg', 'GroupController@create' )->name( 'cbg' );
