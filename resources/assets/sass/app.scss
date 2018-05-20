@@ -86,3 +86,31 @@
 .show {
     width: 100vw;
 }
+
+// Home
+.goal {
+    height: 28px;
+    text-align: center;
+}
+.panel-matches {
+    display: block;
+    padding: 1em 0;
+    margin: 0.5em 0;
+    width: 100%;
+    border: 1px solid $text-color;
+    border-radius: 5px;
+}
+.panel-matches p {
+    margin-right: 1em;
+    text-align: right;
+    font-size: 12px;
+}
+.panel-matches-mat {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+.panel-matches-mat span {
+    width: 12.5%;
+}

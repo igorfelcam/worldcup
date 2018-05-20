@@ -42,11 +42,6 @@
                 </a>
 
                 <div class="menu-select">
-                    {{--display: flex;
-    height: 100%;
-    background-color: red;
-    width: 5em;
-    font-size: 18px;  --}}
                     <span @click="showMenu" class="select menu-icon">
                         &#9776;
                     </span>

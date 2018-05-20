@@ -8444,3 +8444,38 @@ button.close {
   width: 100vw;
 }
 
+.goal {
+  height: 28px;
+  text-align: center;
+}
+
+.panel-matches {
+  display: block;
+  padding: 1em 0;
+  margin: 0.5em 0;
+  width: 100%;
+  border: 1px solid #636b6f;
+  border-radius: 5px;
+}
+
+.panel-matches p {
+  margin-right: 1em;
+  text-align: right;
+  font-size: 12px;
+}
+
+.panel-matches-mat {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.panel-matches-mat span {
+  width: 12.5%;
+}
+
