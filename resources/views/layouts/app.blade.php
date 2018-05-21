@@ -31,7 +31,7 @@
                     {{ config('app.name', '') }}
                 </a>
                 <div class="nav-items-new">
-                    <a href="{{ route('register') }}">
+                    <a class="color-inh" href="{{ route('register') }}">
                         Criar conta
                     </a>
                 </div>
@@ -41,10 +41,13 @@
                     {{ Auth::user()->username }}
                 </a>
 
-                <div class="menu-select">
-                    <span @click="showMenu" class="select menu-icon">
-                        &#9776;
-                    </span>
+                <div class="menu-select-header">
+                    <div class="menu-select">
+                        <span class="neon-score">999</span>
+                        <span @click="showMenu" class="select menu-icon">
+                            &#9776;
+                        </span>
+                    </div>
                 </div>
 
             @endif
@@ -58,17 +61,23 @@
                     {{-- &times; --}}
                     &#10006;
                 </a>
-                <hr></hr>
-                <span>Pontuação</span>
-                <a href="#">Resultados gerais</a>
-                <a href="#">Comparar resultados</a>
-                <hr></hr>
-                <span>Grupos</span>
-                <a href="#">Ver ranking</a>
-                <a href="#">Buscar grupo</a>
-                <a href="#">Criar grupo</a>
-                <hr></hr>
-                <a href="#">Sair</a>
+                {{-- <a class="" href="{{ url('/home') }}">Worldcup</a> --}}
+                {{-- <div class="">
+                    <span>Pontuação</span>
+                </div> --}}
+                <div class="group-menu-item">
+                    <a href="{{ route('home') }}">Resultados gerais</a>
+                    {{-- <span>Grupos</span> --}}
+                    <a href="#">Ver ranking no grupo</a>
+                    <a href="#">Comparar com amigo</a>
+                    <a href="#">Buscar por grupo</a>
+                    <a href="{{ route('cbg') }}">Criar grupo de apostas</a>
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                        Sair
+                    </a><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                </div>
             </div>
         @endif
 

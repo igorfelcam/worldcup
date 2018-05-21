@@ -8354,6 +8354,34 @@ button.close {
   cursor: pointer;
 }
 
+.btn-primary,
+.btn-primary:active {
+  background-color: #a61f1a;
+  border-color: #730000;
+}
+
+.btn-primary:hover,
+.btn-primary:active:hover {
+  background-color: #730000;
+  border-color: #a61f1a;
+}
+
+.color-inh {
+  color: #636b6f;
+}
+
+.navbar-default .navbar-brand {
+  color: #a61f1a;
+  font-weight: bold;
+}
+
+.neon-score {
+  color: #2ab27b;
+  padding: 0 1em;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .padding-img {
   padding: 11px 0 11px 11px;
 }
@@ -8377,17 +8405,21 @@ button.close {
           align-items: center;
 }
 
+.menu-select-header {
+  width: 100%;
+  text-align: right;
+}
+
 .menu-select {
-  position: fixed;
-  right: 1em;
   min-height: 50px;
+  margin-right: 1em;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #d3e0e9;
+  color: #636b6f;
 }
 
 .menu-icon {
@@ -8401,7 +8433,7 @@ button.close {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #d3e0e9;
+  border: 1px solid #636b6f;
 }
 
 .sidenav {
@@ -8411,8 +8443,7 @@ button.close {
   width: 0;
   top: 0;
   left: 0;
-  padding-top: 60px;
-  background-color: #840000f5;
+  background-color: #0e0e0efc;
   overflow-x: hidden;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -8434,10 +8465,26 @@ button.close {
 
 .sidenav .closebtn {
   position: absolute;
-  padding: 0.5em 1em;
+  padding: 0.5em 1.5em;
   top: 0;
   right: 0;
   font-size: 20px;
+}
+
+.group-menu-item {
+  margin-top: 3.5em;
+}
+
+.group-menu-item a {
+  border-bottom: 1px solid #292929;
+}
+
+.group-menu-item a:hover {
+  background-color: #000;
+}
+
+.group-menu-item a:active {
+  background-color: #fff;
 }
 
 .show {
@@ -8446,6 +8493,7 @@ button.close {
 
 .goal {
   height: 28px;
+  padding: 0;
   text-align: center;
 }
 
@@ -8477,5 +8525,14 @@ button.close {
 
 .panel-matches-mat span {
   width: 12.5%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #636b6f;
 }
 

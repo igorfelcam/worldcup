@@ -32,7 +32,7 @@
                                     <img width="28" height="28" src="{{ $match->flag_a }}" alt="">
                                 </span>
                                 <span>
-                                    <input class="form-control goal" type="text" name="" value="10"><!--LIMITAR TAMANHO E VALIDAR-->
+                                    <input class="form-control goal" type="text" name="" value=""><!--LIMITAR TAMANHO E VALIDAR-->
                                 </span>
                                 <span>
                                     &#10006;

@@ -11,6 +11,30 @@
 .select {
     cursor: pointer;
 }
+.btn-primary, .btn-primary:active {
+    background-color: $btn-background-color;
+    border-color: $btn-border-color;
+    &:hover {
+        background-color: $btn-border-color;
+        border-color: $btn-background-color;
+    }
+}
+.color-inh {
+    color: $text-color;
+}
+.navbar-default .navbar-brand {
+    color: $btn-background-color;
+    font-weight: bold;
+}
+
+// header
+.neon-score {
+    color: $brand-success;
+    padding: 0 1em;
+    font-size: 20px;
+    font-weight: bold;
+    // text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+}
 
 // menu
 .padding-img {
@@ -29,15 +53,20 @@
 }
 
 // show menu
+.menu-select-header {
+    width: 100%;
+    text-align: right;
+}
 .menu-select {
-    position: fixed;
-    right: 1em;
+    // position: fixed;
+    // right: 1em;
     min-height: 50px;
+    margin-right: 1em;
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
     align-items: center;
-    color: $laravel-border-color;
+    color: $text-color;
 }
 .menu-icon {
     height: 38px;
@@ -46,7 +75,7 @@
     border-radius: 5px;
     display: inline-flex;
     align-items: center;
-    border: 1px solid $laravel-border-color;
+    border: 1px solid $text-color;
 }
 .sidenav {
     z-index: 99;
@@ -55,8 +84,8 @@
     width: 0;
     top: 0;
     left: 0;
-    padding-top: 60px;
-    background-color: #840000f5;
+    // padding-top: 60px;
+    background-color: #0e0e0efc;//#840000f5;
     overflow-x: hidden;
     transition: 0.5s;
 }
@@ -74,10 +103,22 @@
 }
 .sidenav .closebtn {
     position: absolute;
-    padding: 0.5em 1em;
+    padding: 0.5em 1.5em;
     top: 0;
     right: 0;
     font-size: 20px;
+}
+.group-menu-item {
+    margin-top: 3.5em;
+    & a {
+        border-bottom: 1px solid #292929;
+    }
+    & a:hover {
+        background-color: #000;
+    }
+    & a:active {
+        background-color: #fff;
+    }
 }
 @media screen and (max-height: 450px) {
   // .sidenav { padding-top: 15px; }
@@ -90,6 +131,7 @@
 // Home
 .goal {
     height: 28px;
+    padding: 0;
     text-align: center;
 }
 .panel-matches {
@@ -113,4 +155,14 @@
 }
 .panel-matches-mat span {
     width: 12.5%;
+}
+
+// footer
+footer {
+    position: fixed;
+    bottom: 0;
+    background-color: $navbar-default-bg;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid $text-color;
 }

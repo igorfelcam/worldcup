@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading">Entrar</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
@@ -48,7 +48,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
@@ -56,9 +56,9 @@
                                     Entrar
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Esqueci minha senha
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                     </form>
@@ -67,4 +67,13 @@
         </div>
     </div>
 </div>
+
+<footer>
+    <div class="">
+        <a class="btn btn-link color-inh" href="{{ route('password.request') }}">
+            Esqueci minha senha
+        </a>
+    </div>
+</footer>
+
 @endsection
