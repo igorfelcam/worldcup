@@ -43,7 +43,11 @@
 
                 <div class="menu-select-header">
                     <div class="menu-select">
-                        <span class="neon-score">999</span>
+                        <span class="neon-score">
+                            @if ( isset( $total_score ) )
+                                {{ $total_score }}
+                            @endif
+                        </span>
                         <span @click="showMenu" class="select menu-icon">
                             &#9776;
                         </span>

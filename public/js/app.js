@@ -11968,8 +11968,24 @@ var app = new Vue({
         showNow: false
     },
     methods: {
+        // show the menu
         showMenu: function showMenu() {
             this.showNow = !this.showNow;
+        },
+
+        // make bet
+        enterBet: function enterBet(event) {
+            // valid number with regex
+            if (/[0-9]/.test(event.target.value)) {
+                // console.log( "true" );
+                Vue.axios.get('/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value).then(function (response) {
+                    console.log('Maked bet');
+                }).catch(function (e) {
+                    console.log("Error: " + e);
+                });
+            } else {
+                console.log("not is a number!");
+            }
         }
     }
 });

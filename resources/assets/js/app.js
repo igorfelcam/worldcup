@@ -24,8 +24,26 @@ const app = new Vue({
         showNow: false
     },
     methods: {
-        showMenu: function () {
+        // show the menu
+        showMenu () {
             this.showNow = !this.showNow
+        },
+        // make bet
+        enterBet ( event ) {
+            // valid number with regex
+            if ( /[0-9]/.test( event.target.value ) ) {
+                // console.log( "true" );
+                Vue.axios.get( '/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
+                    .then( response => {
+                        console.log( 'Maked bet' )
+                    })
+                    .catch( e => {
+                        console.log( "Error: " + e )
+                    })
+            }
+            else {
+                console.log( "not is a number!" );
+            }
         }
     }
 });

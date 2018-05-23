@@ -37,7 +37,7 @@
                 <div class="panel-footer">
                     <div class="text-right">
                         {{-- to be continue --}}
-                        <a href="{{ route('notGroup') }}">...ou criar grupo depois</a>
+                        <a href="{{ url('notGroup') }}">...ou criar grupo depois</a>
                     </div>
                 </div>
 

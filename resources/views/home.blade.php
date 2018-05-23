@@ -32,13 +32,25 @@
                                     <img width="28" height="28" src="{{ $match->flag_a }}" alt="">
                                 </span>
                                 <span>
-                                    <input class="form-control goal" type="text" name="" value=""><!--LIMITAR TAMANHO E VALIDAR-->
+                                    <input class="form-control goal"
+                                        id="{{ $match->match_id }}"
+                                        type="text"
+                                        name="team_first"
+                                        @keyup="enterBet"
+                                        value="{{ $match->bet_first_team_goals }}"
+                                    ><!--LIMITAR TAMANHO E VALIDAR COM VUE-->
                                 </span>
                                 <span>
                                     &#10006;
                                 </span>
                                 <span>
-                                    <input class="form-control goal" type="text" name="" value="10">
+                                    <input class="form-control goal"
+                                        id="{{ $match->match_id }}"
+                                        type="text"
+                                        name="team_second"
+                                        @keyup="enterBet"
+                                        value="{{ $match->bet_second_team_goals }}"
+                                    >
                                 </span>
                                 <span>
                                     <img width="28" height="28" src="{{ $match->flag_b }}" alt="">
@@ -47,7 +59,7 @@
                                     {{ $match->team_b }}
                                 </span>
                                 <span>
-                                    3
+                                    <b>{{ $match->score }}</b>
                                 </span>
                             </div>
                         </div>

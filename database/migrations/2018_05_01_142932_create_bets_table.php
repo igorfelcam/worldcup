@@ -17,10 +17,10 @@ class CreateBetsTable extends Migration
             $table->increments( 'id' );
             $table->integer( 'user_id' );
             $table->integer( 'matches_soccer_id' );
-            $table->integer( 'first_team_goals' );
-            $table->integer( 'second_team_goals' );
-            $table->integer( 'score' );
-            $table->date( 'limit_date' );
+            $table->integer( 'first_team_goals' )->nullable();
+            $table->integer( 'second_team_goals' )->nullable();
+            $table->integer( 'score' )->nullable();
+            // $table->date( 'limit_date' );
             $table->timestamps();
         });
     }

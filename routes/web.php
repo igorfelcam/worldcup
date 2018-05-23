@@ -28,3 +28,5 @@ Route::get( 'api/search/{name}', 'GroupController@search' )->name( 'search' );
 Route::get( 'api/enterGroup/{group_id}/{user_id}', 'GroupController@enterGroup' )->name( 'enterGroup' );
 // exit bet group
 Route::get( 'api/exitGroup/{group_id}/{user_id}', 'GroupController@exitGroup' )->name( 'exitGroup' );
+// make bet
+Route::get( 'api/makeBet/{match_id}/{team}/{bet_value}', 'BetController@create' )->name( 'makeBet' );
