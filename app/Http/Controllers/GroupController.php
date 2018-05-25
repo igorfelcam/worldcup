@@ -73,6 +73,16 @@ class GroupController extends Controller
         return view( 'home' )->with( 'bet_groups', $bet_groups );
     }
 
+
+    /*
+     * open page search bet group
+    */
+    public function searchPage()
+    {
+        // redirect the page search bet group
+        return view( 'search_bet_group' );
+    }
+
     /**
      * search bets group
      *

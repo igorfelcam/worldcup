@@ -1,38 +1,56 @@
 <template lang="html">
 
-    <div class="container">
-        <input class=""
+    <div class="form-group">
+
+        <input
+            class="form-control"
             name="searchgroup"
             type="text"
             placeholder="Buscar grupos"
             v-model="group"
             @keyup="searchBetsGroups()"
+            required
+            autofocus
         />
 
-        <div v-if="results_groups && results_groups.length">
-            <div v-for="group in results_groups">
-                <p>
-                    {{ group.group_name }}
+        <div class="container"
+            v-if="results_groups && results_groups.length"
+        >
+            <div class="row list-results"
+                v-for="group in results_groups"
+            >
+                <div class="col list-results-item">{{ group.group_name }}</div>
+                <div class="col list-results-item text-right">
                     <span>
-                        <a v-if="user_id == group.user_create">
+                        <a class="btn btn-primary"
+                            v-if="user_id == group.user_create"
+                        >
                             <!-- user created group -->
-                            <span>Convidar amigos</span>        <!-- link para a view de convidar amigos -->
+                            <span>Convidar amigos</span>        <!-- *** link para a view de convidar amigos *** -->
                         </a>
-                        <a v-else-if="group.user_participe == false && group.user_invite == false" v-on:click="enterGroup( group.group_id )">
+                        <a class="btn btn-primary"
+                            v-else-if="group.user_participe == false && group.user_invite == false"
+                            v-on:click="enterGroup( group.group_id )"
+                        >
                             <!-- user not participe and not sent solicitation of group -->
                             <span>Entrar</span>
                         </a>
-                        <a v-else-if="group.user_participe == false && group.user_invite == true">
+                        <a class="btn btn-success"
+                            v-else-if="group.user_participe == false && group.user_invite == true"
+                        >
                             <!-- user don't partipe and solicited entry and don't participe -->
                             <!-- user request entry in group -->
                             <span>Solicitado</span>
                         </a>
-                        <a v-else-if="group.user_participe == true && user_id != group.user_create" v-on:click="exitGroup( group.group_id )">
+                        <a class="btn btn-primary"
+                            v-else-if="group.user_participe == true && user_id != group.user_create"
+                            v-on:click="exitGroup( group.group_id )"
+                        >
                             <!-- user participe and don't created the group -->
                             <span>Sair</span>
                         </a>
                     </span>
-                </p>
+                </div>
             </div>
         </div>
     </div>
@@ -106,4 +124,9 @@ export default {
 </script>
 
 <style lang="css">
+    .list-results {
+        display: flex;
+        padding: 0.25em;
+    }
+    .list-results-item { width: 50%; }
 </style>

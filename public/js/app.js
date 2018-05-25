@@ -43160,7 +43160,7 @@ exports = module.exports = __webpack_require__(41)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.list-results {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    padding: 0.25em;\n}\n.list-results-item { width: 50%;\n}\n", ""]);
 
 // exports
 
@@ -43670,6 +43670,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -43747,7 +43765,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "form-group" }, [
     _c("input", {
       directives: [
         {
@@ -43757,10 +43775,13 @@ var render = function() {
           expression: "group"
         }
       ],
+      staticClass: "form-control",
       attrs: {
         name: "searchgroup",
         type: "text",
-        placeholder: "Buscar grupos"
+        placeholder: "Buscar grupos",
+        required: "",
+        autofocus: ""
       },
       domProps: { value: _vm.group },
       on: {
@@ -43779,22 +43800,25 @@ var render = function() {
     _vm.results_groups && _vm.results_groups.length
       ? _c(
           "div",
+          { staticClass: "container" },
           _vm._l(_vm.results_groups, function(group) {
-            return _c("div", [
-              _c("p", [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(group.group_name) +
-                    "\n                "
-                ),
+            return _c("div", { staticClass: "row list-results" }, [
+              _c("div", { staticClass: "col list-results-item" }, [
+                _vm._v(_vm._s(group.group_name))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col list-results-item text-right" }, [
                 _c("span", [
                   _vm.user_id == group.user_create
-                    ? _c("a", [_c("span", [_vm._v("Convidar amigos")])])
+                    ? _c("a", { staticClass: "btn btn-primary" }, [
+                        _c("span", [_vm._v("Convidar amigos")])
+                      ])
                     : group.user_participe == false &&
                       group.user_invite == false
                       ? _c(
                           "a",
                           {
+                            staticClass: "btn btn-primary",
                             on: {
                               click: function($event) {
                                 _vm.enterGroup(group.group_id)
@@ -43805,12 +43829,15 @@ var render = function() {
                         )
                       : group.user_participe == false &&
                         group.user_invite == true
-                        ? _c("a", [_c("span", [_vm._v("Solicitado")])])
+                        ? _c("a", { staticClass: "btn btn-success" }, [
+                            _c("span", [_vm._v("Solicitado")])
+                          ])
                         : group.user_participe == true &&
                           _vm.user_id != group.user_create
                           ? _c(
                               "a",
                               {
+                                staticClass: "btn btn-primary",
                                 on: {
                                   click: function($event) {
                                     _vm.exitGroup(group.group_id)

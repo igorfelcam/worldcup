@@ -22,6 +22,8 @@ Route::get( '/notGroup', 'HomeController@notViewCreateGroup' )->name( 'notGroup'
 // create bet group
 Route::get( '/cbg', 'GroupController@index' )->name( 'cbg' );
 Route::post( '/cbg', 'GroupController@create' )->name( 'cbg' );
+// search bet group page
+Route::get( '/sbg', 'GroupController@searchPage' )->name( 'sbg' );
 // search bet groups
 Route::get( 'api/search/{name}', 'GroupController@search' )->name( 'search' );
 // ask invit enter bet group

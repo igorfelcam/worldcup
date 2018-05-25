@@ -5,9 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Criar grupo de apostas</div>
+                <div class="panel-heading">Buscar grupo de apostas</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('cbg') }}">
+                    {{-- <form class="form-horizontal" method="POST" action="{{ route('cbg') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('namegroup') ? ' has-error' : '' }}">
@@ -31,14 +31,21 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
+
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <betsgroups></betsgroups>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="panel-footer">
+                {{-- <div class="panel-footer">
                     <div class="text-right">
                         <a href="{{ url('notGroup') }}">...ou criar grupo depois</a>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

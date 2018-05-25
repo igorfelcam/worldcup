@@ -74,7 +74,7 @@
                     {{-- <span>Grupos</span> --}}
                     <a href="#">Ver ranking no grupo</a>
                     <a href="#">Comparar com amigo</a>
-                    <a href="#">Buscar por grupo</a>
+                    <a href="{{ route('sbg') }}">Buscar por grupo</a>
                     <a href="{{ route('cbg') }}">Criar grupo de apostas</a>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
