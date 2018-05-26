@@ -11,10 +11,18 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('namegroup') ? ' has-error' : '' }}">
-                            <label for="namegroup" class="col-md-4 control-label">Nome do grupo</label>
+                            {{-- <label for="namegroup" class="col-md-4 control-label">Nome do grupo</label> --}}
 
                             <div class="col-md-6">
-                                <input id="namegroup" type="text" class="form-control" name="namegroup" value="{{ old('namegroup') }}" required autofocus>
+                                <input id="namegroup"
+                                    type="text"
+                                    class="form-control"
+                                    name="namegroup"
+                                    value="{{ old('namegroup') }}"
+                                    placeholder="Nome do grupo"
+                                    required
+                                    autofocus
+                                >
 
                                 @if ($errors->has('namegroup'))
                                     <span class="help-block">
@@ -36,7 +44,7 @@
 
                 <div class="panel-footer">
                     <div class="text-right">
-                        <a href="{{ url('notGroup') }}">...ou criar grupo depois</a>
+                        <a href="{{ url('notGroup') }}">... ou criar grupo depois</a>
                     </div>
                 </div>
 

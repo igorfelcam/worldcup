@@ -70,10 +70,10 @@
                     <span>Pontuação</span>
                 </div> --}}
                 <div class="group-menu-item">
-                    <a href="{{ route('home') }}">Resultados gerais</a>
-                    {{-- <span>Grupos</span> --}}
+                    <a href="{{ route('home') }}">Apostas e resultados</a>
                     <a href="#">Ver ranking no grupo</a>
                     <a href="#">Comparar com amigo</a>
+                    <a href="#">Meus grupos</a> {{-- SOMENTE SE O USUÁRIO TIVER ALGUM GRUPO CRIADO --}}
                     <a href="{{ route('sbg') }}">Buscar por grupo</a>
                     <a href="{{ route('cbg') }}">Criar grupo de apostas</a>
                     <a href="{{ route('logout') }}"

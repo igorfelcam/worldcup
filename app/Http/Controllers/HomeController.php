@@ -31,6 +31,9 @@ class HomeController extends Controller
             return view( 'create_bet_group' );
         }
         else {
+            /*
+             * COLOCAR NA MESMA TELA OS JOGOS QUE FOREM ACONTECENDO
+            */
             // select bet groups
             $bet_groups = DB::table( 'bets_groups' )
                             ->select( 'name' )
@@ -76,6 +79,7 @@ class HomeController extends Controller
                                 ]);
         }
     }
+
     /*
      * set fallse in view group
     */

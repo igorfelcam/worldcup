@@ -16,6 +16,7 @@ Route::get( '/', function () {
 
 Auth::routes();
 
+// bets page
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // false view create group
 Route::get( '/notGroup', 'HomeController@notViewCreateGroup' )->name( 'notGroup' );
