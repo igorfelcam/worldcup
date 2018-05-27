@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 // Vue.component('example', require('./components/Example.vue'));
 Vue.component('betsgroups', require('./components/BetsGroups.vue'));
+Vue.component('comparefriend', require('./components/CompareFriend.vue'));
 
 const app = new Vue({
     el: '#app',

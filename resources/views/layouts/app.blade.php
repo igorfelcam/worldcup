@@ -70,17 +70,17 @@
                     <span>Pontuação</span>
                 </div> --}}
                 <div class="group-menu-item">
-                    <a href="{{ route('home') }}">Apostas e resultados</a>
+                    <a href="{{ route( 'home' ) }}">Apostas e resultados</a>
                     <a href="#">Ver ranking no grupo</a>
-                    <a href="#">Comparar com amigo</a>
-                    <a href="#">Meus grupos</a> {{-- SOMENTE SE O USUÁRIO TIVER ALGUM GRUPO CRIADO --}}
-                    <a href="{{ route('sbg') }}">Buscar por grupo</a>
-                    <a href="{{ route('cbg') }}">Criar grupo de apostas</a>
-                    <a href="{{ route('logout') }}"
+                    <a href="{{ route( 'compare' ) }}">Comparar com amigo</a>
+                    <a href="#">Gerenciar grupos</a> {{-- SOMENTE SE O USUÁRIO TIVER ALGUM GRUPO CRIADO --}}
+                    <a href="{{ route( 'sbg' ) }}">Buscar por grupo</a>
+                    <a href="{{ route( 'cbg' ) }}">Criar grupo de apostas</a>
+                    <a href="{{ route( 'logout' ) }}"
                         onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                         Sair
-                    </a><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                    </a><form id="logout-form" action="{{ route( 'logout' ) }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                 </div>
             </div>
         @endif

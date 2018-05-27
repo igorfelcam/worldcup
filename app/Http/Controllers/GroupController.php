@@ -112,6 +112,7 @@ class GroupController extends Controller
                             $join->on( 'inv.notify', '=', DB::raw( '1' ) );
                         })
                         ->where( 'bg.name', 'LIKE', '%'.$name.'%' )
+                        ->orderBy('bg.name', 'asc')
                         ->paginate( 50 );
 
         return response()->json([

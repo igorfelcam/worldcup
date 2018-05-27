@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use DB;
 
 class BetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( 'auth' );
+    }
     /*
      * put bet in database
     */
@@ -66,5 +71,88 @@ class BetController extends Controller
         }
 
         return;
+    }
+
+    /*
+     * view for compare bet with friend's bet
+    */
+    public function compareView ()
+    {
+        $user = auth()->user();
+
+        $friend = 'maumau';
+
+
+        return view( 'compare' );
+    }
+
+    /*
+     * get friends for compare
+    */
+    public function search ( $name )
+    {
+        $user = auth()->user();
+
+        // get friends
+        $response = DB::table( 'users as us' )
+                        ->select( 'us.username as name' )
+                        ->where([
+                            [ 'us.username', 'LIKE', '%'.$name.'%' ],
+                            [ 'us.id', '<>', $user->id ]
+                        ])
+                        ->orderBy('us.username', 'asc')
+                        ->paginate( 50 );
+
+        return response()->json([
+            'friends'       => $response,
+            'user'          => $user
+        ]);
+    }
+
+    /*
+     * get compare bet with friend's bet
+    */
+    public function getCompare ( $friend )
+    {
+        $user = auth()->user();
+
+        // get comparation
+        $response = DB::table( 'matches_soccers as mat' )
+                        ->select(
+                            'typ.name as tipo',
+                            'tea.nickname as teama',
+                            'tea.url_flag as flaga',
+                            'mat.first_team_goals as goalsa',
+                            'teb.nickname as teamb',
+                            'teb.url_flag as flagb',
+                            'mat.second_team_goals as goalsb',
+                            'usa.username as usera',
+                            'bea.first_team_goals as betaa',
+                            'bea.second_team_goals as betba',
+                            'usb.username as userb',
+                            'beb.first_team_goals as betab',
+                            'beb.second_team_goals as betbb'
+                        )
+                        ->join( 'type_matches as typ', 'mat.type_match_id', '=', 'typ.id' )
+                        ->join( 'teams as tea', 'mat.first_team_id', '=', 'tea.id' )
+                        ->join( 'teams as teb', 'mat.second_team_id', '=', 'teb.id' )
+                        ->leftJoin( 'users as usa', 'usa.id', '=', DB::raw( $user->id ))
+                        ->leftJoin( 'users as usb', 'usb.username', '=', DB::raw( '"'.$friend.'"' ))
+                        ->leftJoin( 'bets as bea', function( $join ){
+                            $join->on( 'mat.id', '=', 'bea.matches_soccer_id' );
+                            $join->on( 'bea.user_id', '=', 'usa.id' );
+                        })
+                        ->leftJoin( 'bets as beb', function( $join ){
+                            $join->on( 'mat.id', '=', 'beb.matches_soccer_id' );
+                            $join->on( 'beb.user_id', '=', 'usb.id' );
+                        })
+                        ->orderBy('mat.match_date', 'asc')
+                        ->get();
+
+        return response()->json([
+            'friends'   => $response,
+            'user'      => $user
+        ]);
+
     }
 }

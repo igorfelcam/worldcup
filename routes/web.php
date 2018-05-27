@@ -33,3 +33,9 @@ Route::get( 'api/enterGroup/{group_id}/{user_id}', 'GroupController@enterGroup' 
 Route::get( 'api/exitGroup/{group_id}/{user_id}', 'GroupController@exitGroup' )->name( 'exitGroup' );
 // make bet
 Route::get( 'api/makeBet/{match_id}/{team}/{bet_value}', 'BetController@create' )->name( 'makeBet' );
+// compare friend
+Route::get( 'compare', 'BetController@compareView' )->name( 'compare' );
+// get friends
+Route::get( 'api/comparefriend/{name}', 'BetController@search' )->name( 'comparefriend' );
+// get compare
+Route::get( 'api/getcompare/{friend}', 'BetController@getCompare' )->name( 'getcompare' );
