@@ -20,8 +20,15 @@ class GroupController extends Controller
      */
     public function index()
     {
+        $user_id = auth()->user()->id;
+
+        $bet_groups = DB::table( 'bets_groups' )
+                        ->select( 'name' )
+                        ->where( 'user_create_id', $user_id )
+                        ->get();
+
         // redirect the page create bet group
-        return view( 'create_bet_group' );
+        return view( 'create_bet_group' )->with( 'bet_groups', $bet_groups );
     }
 
     /**
@@ -64,13 +71,7 @@ class GroupController extends Controller
                     'bets_group_id' => $bet_group_id[0]->id
                 ]);
         }
-        // select bet groups
-        $bet_groups = DB::table( 'bets_groups' )
-                        ->select( 'name' )
-                        ->where( 'user_create_id', $user->id )
-                        ->get();
-
-        return view( 'home' )->with( 'bet_groups', $bet_groups );
+        return redirect()->route('home');
     }
 
 
@@ -79,8 +80,15 @@ class GroupController extends Controller
     */
     public function searchPage()
     {
+        $user_id = auth()->user()->id;
+
+        $bet_groups = DB::table( 'bets_groups' )
+                        ->select( 'name' )
+                        ->where( 'user_create_id', $user_id )
+                        ->get();
+
         // redirect the page search bet group
-        return view( 'search_bet_group' );
+        return view( 'search_bet_group' )->with( 'bet_groups', $bet_groups );
     }
 
     /**
@@ -177,6 +185,21 @@ class GroupController extends Controller
             }
         }
         return;
+    }
+
+    /*
+     * manage be group
+    */
+    public function managePage() {
+        $user_id = auth()->id();
+
+        $bet_groups = DB::table( 'bets_groups' )
+                        ->select( 'name' )
+                        ->where( 'user_create_id', $user_id )
+                        ->get();
+        $bet_groups = json_encode( $bet_groups );
+
+        return view( 'manage' )->with( 'bet_groups', $bet_groups );
     }
 
     /**

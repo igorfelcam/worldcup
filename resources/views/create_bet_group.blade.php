@@ -13,7 +13,7 @@
                         <div class="form-group{{ $errors->has('namegroup') ? ' has-error' : '' }}">
                             {{-- <label for="namegroup" class="col-md-4 control-label">Nome do grupo</label> --}}
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="namegroup"
                                     type="text"
                                     class="form-control"

@@ -34,12 +34,24 @@ class HomeController extends Controller
             /*
              * COLOCAR NA MESMA TELA OS JOGOS QUE FOREM ACONTECENDO
             */
-            // select bet groups
-            $bet_groups = DB::table( 'bets_groups' )
-                            ->select( 'name' )
-                            ->where( 'user_create_id', $user->id )
-                            ->get();
+            // verify exist user's bet groups
+            $exist_bet_groups = DB::table( 'bets_groups' )
+                                    ->select( 'name' )
+                                    ->where( 'user_create_id', $user->id )
+                                    ->exists();
+            if ( $exist_bet_groups ) {
+                // get user's bet groups
+                $bet_groups = DB::table( 'bets_groups' )
+                                ->select( 'name' )
+                                ->where( 'user_create_id', $user->id )
+                                ->get();
+                // VERIFICAR SE REALMENTE PRECISA DAR GET AQUI
+            }
+            else {
+                $bet_groups = null;
+            }
 
+            // matches soccers
             $matches_soccers = DB::table( 'matches_soccers as mat' )
                                     ->select(
                                         'mat.id as match_id',
@@ -70,12 +82,10 @@ class HomeController extends Controller
                                 ->where( 'user_id', '=', $user->id )
                                 ->sum( 'score' );
 
-            // var_dump( $total_score );
-
             return view( 'home' )->with([
-                                    'bet_groups' => $bet_groups,
-                                    'matches_soccers' => $matches_soccers,
-                                    'total_score' => $total_score
+                                    'bet_groups'        => $bet_groups,
+                                    'matches_soccers'   => $matches_soccers,
+                                    'total_score'       => $total_score
                                 ]);
         }
     }

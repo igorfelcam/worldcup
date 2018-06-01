@@ -122,7 +122,7 @@ export default {
 </script>
 
 <style lang="css">
-    .list-results {
+    /* .list-results {
         display: flex;
         padding: 0.25em;
         font-size: 12px;
@@ -137,5 +137,5 @@ export default {
         width: 100%;
         padding: 0.25em;
         font-size: 12px;
-    }
+    } */
 </style>

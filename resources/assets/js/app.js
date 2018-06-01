@@ -18,11 +18,14 @@ window.Vue = require('vue');
 // Vue.component('example', require('./components/Example.vue'));
 Vue.component('betsgroups', require('./components/BetsGroups.vue'));
 Vue.component('comparefriend', require('./components/CompareFriend.vue'));
+Vue.component('managegroup', require('./components/ManageGroup.vue'));
 
 const app = new Vue({
     el: '#app',
     data: {
-        showNow: false
+        showNow: false,
+        adc_friend: null,
+        results_adc_friends: []
     },
     methods: {
         // show the menu
@@ -43,8 +46,29 @@ const app = new Vue({
                     })
             }
             else {
-                console.log( "not is a number!" );
+                console.log( "not is a number!" )
             }
-        }
+        },
+        // searchAdcFriend ( event ) {
+        //     this.adc_friend = event.target.value
+        //
+        //     if ( this.adc_friend != null ) {
+        //         console.log("here");
+        //         Vue.axios.get( '/api/comparefriend/' + this.adc_friend )
+        //             .then( response => {
+        //                 // friends
+        //                 this.results_adc_friends = response.data.friends.data
+        //                 // user id
+        //                 // this.user_id = response.data.user.id
+        //                 // console.log( this.results_adc_friends );
+        //             })
+        //             .catch( e => {
+        //                 console.log( "Error: " + e )
+        //             })
+        //     }
+        //     else {
+        //         this.results_friends = null
+        //     }
+        // }
     }
 });

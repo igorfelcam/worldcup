@@ -166,3 +166,33 @@ footer {
     text-align: center;
     border-top: 1px solid $text-color;
 }
+
+//
+.no-pad {
+    padding: 0;
+}
+.panel-groups {
+    display: flex;
+    align-items: center;
+}
+.item-groups {
+    width: 50%;
+    padding: 1em;
+}
+// components
+.list-results {
+    display: flex;
+    padding: 0.25em;
+    font-size: 12px;
+}
+.list-results-item {
+    width: 60%;
+}
+.list-results-item-btn {
+    width: 40%;
+}
+.list-results-item-btn button {
+    width: 100%;
+    padding: 0.25em;
+    font-size: 12px;
+}

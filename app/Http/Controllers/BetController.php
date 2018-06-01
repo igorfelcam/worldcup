@@ -78,12 +78,14 @@ class BetController extends Controller
     */
     public function compareView ()
     {
-        $user = auth()->user();
+        $user_id = auth()->user()->id;
 
-        $friend = 'maumau';
+        $bet_groups = DB::table( 'bets_groups' )
+                        ->select( 'name' )
+                        ->where( 'user_create_id', $user_id )
+                        ->get();
 
-
-        return view( 'compare' );
+        return view( 'compare' )->with( 'bet_groups', $bet_groups );
     }
 
     /*

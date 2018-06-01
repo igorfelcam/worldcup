@@ -19,7 +19,7 @@
                     <div class="list-results"
                         @click="getFriend( friend.name )"
                     >
-                        <span>{{ friend.name }}</span> <!--  CONTINUAR DAQUI COMPARARM -->
+                        <span>{{ friend.name }}</span>
                     </div>
                 </div>
             </div>
