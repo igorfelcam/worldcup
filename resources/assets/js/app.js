@@ -20,6 +20,7 @@ Vue.component('betsgroups', require('./components/BetsGroups.vue'));
 Vue.component('comparefriend', require('./components/CompareFriend.vue'));
 Vue.component('managegroup', require('./components/ManageGroup.vue'));
 Vue.component('select-ranking', require('./components/Ranking.vue'));
+Vue.component('notifications', require('./components/Notifications.vue'));
 
 const app = new Vue({
     el: '#app',

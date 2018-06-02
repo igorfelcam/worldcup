@@ -11,6 +11,21 @@
 .fntsz26 { font-size: 26px; }
 .fntsz12 { font-size: 12px; }
 
+// notifications
+.notf {
+    width: 100%;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+.ntf-item {
+    width: 100%;
+    padding: 1em;
+    margin: 0.5em 0;
+    text-align: center;
+    border: 1px solid $input-border;
+}
+
 .select {
     cursor: pointer;
 }
@@ -72,6 +87,7 @@
     color: $text-color;
 }
 .menu-icon {
+    min-width: 2.1em;
     height: 38px;
     font-size: 20px;
     padding: 2.5px 12px;

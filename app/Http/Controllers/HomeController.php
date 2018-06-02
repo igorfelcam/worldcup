@@ -34,6 +34,7 @@ class HomeController extends Controller
             /*
              * COLOCAR NA MESMA TELA OS JOGOS QUE FOREM ACONTECENDO
             */
+
             // verify exist user's bet groups
             $exist_bet_groups = DB::table( 'bets_groups' )
                                     ->select( 'name' )
@@ -49,6 +50,15 @@ class HomeController extends Controller
             else {
                 $bet_groups = null;
             }
+
+            // get notifications
+            $notifications = DB::table( 'invitations as inv' )
+                                    ->join( 'bets_groups as btg', 'inv.bets_group_id', '=', 'btg.id' )
+                                    ->where([
+                                        [ 'inv.notify', '=', '1' ],
+                                        [ 'btg.user_create_id', '=', $user->id ]
+                                    ])
+                                    ->count();
 
             // matches soccers
             $matches_soccers = DB::table( 'matches_soccers as mat' )
@@ -92,7 +102,8 @@ class HomeController extends Controller
             return view( 'home' )->with([
                                     'bet_groups'        => $bet_groups,
                                     'matches_soccers'   => $matches_soccers,
-                                    'total_score'       => $total_score
+                                    'total_score'       => $total_score,
+                                    'notifications'     => $notifications
                                 ]);
         }
     }

@@ -22,6 +22,15 @@ class GroupController extends Controller
     {
         $user_id = auth()->user()->id;
 
+        // get notifications
+        $notifications = DB::table( 'invitations as inv' )
+                                ->join( 'bets_groups as btg', 'inv.bets_group_id', '=', 'btg.id' )
+                                ->where([
+                                    [ 'inv.notify', '=', '1' ],
+                                    [ 'btg.user_create_id', '=', $user_id ]
+                                ])
+                                ->count();
+
         // user bet groups
         $user_groups = DB::table( 'user_bets_groups as ubg' )
                             ->select( 'ubg.bets_group_id', 'bg.name' )
@@ -46,7 +55,10 @@ class GroupController extends Controller
         }
 
         // redirect the page create bet group
-        return view( 'create_bet_group' )->with( 'bet_groups', $bet_groups );
+        return view( 'create_bet_group' )->with([
+                                    'bet_groups'    => $bet_groups,
+                                    'notifications' => $notifications
+                                ]);
     }
 
     /**
@@ -100,6 +112,15 @@ class GroupController extends Controller
     {
         $user_id = auth()->user()->id;
 
+        // get notifications
+        $notifications = DB::table( 'invitations as inv' )
+                                ->join( 'bets_groups as btg', 'inv.bets_group_id', '=', 'btg.id' )
+                                ->where([
+                                    [ 'inv.notify', '=', '1' ],
+                                    [ 'btg.user_create_id', '=', $user_id ]
+                                ])
+                                ->count();
+
         // user bet groups
         $user_groups = DB::table( 'user_bets_groups as ubg' )
                             ->select( 'ubg.bets_group_id', 'bg.name' )
@@ -124,7 +145,10 @@ class GroupController extends Controller
         }
 
         // redirect the page search bet group
-        return view( 'search_bet_group' )->with( 'bet_groups', $bet_groups );
+        return view( 'search_bet_group' )->with([
+                                    'bet_groups'    => $bet_groups,
+                                    'notifications' => $notifications
+                                ]);
     }
 
     /**
@@ -229,13 +253,25 @@ class GroupController extends Controller
     public function managePage() {
         $user_id = auth()->id();
 
+        // get notifications
+        $notifications = DB::table( 'invitations as inv' )
+                                ->join( 'bets_groups as btg', 'inv.bets_group_id', '=', 'btg.id' )
+                                ->where([
+                                    [ 'inv.notify', '=', '1' ],
+                                    [ 'btg.user_create_id', '=', $user_id ]
+                                ])
+                                ->count();
+
         $bet_groups = DB::table( 'bets_groups' )
                         ->select( 'name' )
                         ->where( 'user_create_id', $user_id )
                         ->get();
         $bet_groups = json_encode( $bet_groups );
 
-        return view( 'manage' )->with( 'bet_groups', $bet_groups );
+        return view( 'manage' )->with([
+                            'bet_groups'    => $bet_groups,
+                            'notifications' => $notifications
+                        ]);
     }
 
     /**
@@ -248,6 +284,15 @@ class GroupController extends Controller
     {
         // redirect conform number of bet groups
         $user_id = auth()->id();
+
+        // get notifications
+        $notifications = DB::table( 'invitations as inv' )
+                                ->join( 'bets_groups as btg', 'inv.bets_group_id', '=', 'btg.id' )
+                                ->where([
+                                    [ 'inv.notify', '=', '1' ],
+                                    [ 'btg.user_create_id', '=', $user_id ]
+                                ])
+                                ->count();
 
         // count bet groups
         $count_bet_groups = DB::table( 'user_bets_groups as ubg' )
@@ -290,7 +335,8 @@ class GroupController extends Controller
                                     'count_bet_groups'  => $count_bet_groups,
                                     'bet_groups'        => $bet_groups,
                                     'ranking'           => $ranking,
-                                    'user_groups'       => $user_groups
+                                    'user_groups'       => $user_groups,
+                                    'notifications'     => $notifications
                                 ]);
     }
 

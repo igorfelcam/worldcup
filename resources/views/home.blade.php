@@ -27,7 +27,7 @@
                                         name="team_first"
                                         @keyup="enterBet"
                                         value="{{ $match->bet_first_team_goals }}"
-                                    ><!--LIMITAR TAMANHO E VALIDAR COM VUE-->
+                                    >
                                 </span>
                                 <span>
                                     &#10006;

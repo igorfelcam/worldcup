@@ -44,7 +44,11 @@
                             @endif
                         </span>
                         <span @click="showMenu" class="select menu-icon">
-                            &#9776;
+                            @if (( isset( $notifications )) && ( $notifications > 0 ))
+                                <div class="notf">{{ $notifications }}</div>
+                            @else
+                                &#9776;
+                            @endif
                         </span>
                     </div>
                 </div>
@@ -57,11 +61,14 @@
                     &#10006;
                 </a>
                 <div class="group-menu-item">
+                    @if (( isset( $notifications )) && ( $notifications > 0 ))
+                        <a href="{{ route( 'notf' ) }}"><b>{{ $notifications }}</b> Solicitações pendentes</a>
+                    @endif
                     <a href="{{ route( 'home' ) }}">Apostas e resultados</a>
                     <a href="{{ route( 'betgroup' ) }}">Ver ranking no grupo</a>
                     <a href="{{ route( 'compare' ) }}">Comparar com amigo</a>
-                    @if ( (isset( $bet_groups )) && ( !is_null( $bet_groups )))
-                        <a href="{{ route( 'mbg' ) }}">Gerenciar grupos</a>    <!-- CRIAR NOTIFICAÇÃO QUANDO TIVER CONVITE -->
+                    @if (( isset( $bet_groups )) && ( !is_null( $bet_groups )))
+                        <a href="{{ route( 'mbg' ) }}">Gerenciar grupos</a>
                     @endif
                     <a href="{{ route( 'sbg' ) }}">Buscar por grupo</a>
                     <a href="{{ route( 'cbg' ) }}">Criar grupo de apostas</a>

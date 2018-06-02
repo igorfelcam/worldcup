@@ -80,6 +80,15 @@ class BetController extends Controller
     {
         $user_id = auth()->user()->id;
 
+        // get notifications
+        $notifications = DB::table( 'invitations as inv' )
+                                ->join( 'bets_groups as btg', 'inv.bets_group_id', '=', 'btg.id' )
+                                ->where([
+                                    [ 'inv.notify', '=', '1' ],
+                                    [ 'btg.user_create_id', '=', $user_id ]
+                                ])
+                                ->count();
+
         // user bet groups
         $user_groups = DB::table( 'user_bets_groups as ubg' )
                             ->select( 'ubg.bets_group_id', 'bg.name' )
@@ -103,7 +112,10 @@ class BetController extends Controller
             $bet_groups = null;
         }
 
-        return view( 'compare' )->with( 'bet_groups', $bet_groups );
+        return view( 'compare' )->with([
+                            'bet_groups'    => $bet_groups,
+                            'notifications' =>  $notifications
+                        ]);
     }
 
     /*
