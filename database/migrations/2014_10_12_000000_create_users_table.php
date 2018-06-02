@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string( 'email' )->unique();
             $table->string( 'password' );
             $table->boolean( 'view_create_group' )->default( true );
+            $table->integer( 'total_score' )->default( 0 );
             $table->rememberToken();
             $table->timestamps();
         });

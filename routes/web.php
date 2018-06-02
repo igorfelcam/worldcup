@@ -41,3 +41,5 @@ Route::get( 'api/comparefriend/{name}', 'BetController@search' )->name( 'compare
 Route::get( 'api/getcompare/{friend}', 'BetController@getCompare' )->name( 'getcompare' );
 // manage page bet group
 Route::get( '/mbg', 'GroupController@managePage' )->name( 'mbg' );
+// ranking bet group
+Route::get( '/betgroup', 'GroupController@showBetGroup' )->name( 'betgroup' );

@@ -80,10 +80,28 @@ class BetController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        $bet_groups = DB::table( 'bets_groups' )
-                        ->select( 'name' )
-                        ->where( 'user_create_id', $user_id )
-                        ->get();
+        // user bet groups
+        $user_groups = DB::table( 'user_bets_groups as ubg' )
+                            ->select( 'ubg.bets_group_id', 'bg.name' )
+                            ->join( 'bets_groups as bg', 'ubg.bets_group_id', '=', 'bg.id' )
+                            ->where( 'ubg.user_id', $user_id )
+                            ->get();
+
+                            // verify exist user's bet groups
+        $exist_bet_groups = DB::table( 'bets_groups' )
+                                ->select( 'name' )
+                                ->where( 'user_create_id', $user_id )
+                                ->exists();
+        if ( $exist_bet_groups ) {
+            // get user's bet groups
+            $bet_groups = DB::table( 'bets_groups' )
+                            ->select( 'name' )
+                            ->where( 'user_create_id', $user_id )
+                            ->get();
+        }
+        else {
+            $bet_groups = null;
+        }
 
         return view( 'compare' )->with( 'bet_groups', $bet_groups );
     }

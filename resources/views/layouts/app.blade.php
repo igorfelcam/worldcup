@@ -58,7 +58,7 @@
                 </a>
                 <div class="group-menu-item">
                     <a href="{{ route( 'home' ) }}">Apostas e resultados</a>
-                    <a href="#">Ver ranking no grupo</a>
+                    <a href="{{ route( 'betgroup' ) }}">Ver ranking no grupo</a>
                     <a href="{{ route( 'compare' ) }}">Comparar com amigo</a>
                     @if ( (isset( $bet_groups )) && ( !is_null( $bet_groups )))
                         <a href="{{ route( 'mbg' ) }}">Gerenciar grupos</a>    <!-- CRIAR NOTIFICAÇÃO QUANDO TIVER CONVITE -->

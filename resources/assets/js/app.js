@@ -19,6 +19,7 @@ window.Vue = require('vue');
 Vue.component('betsgroups', require('./components/BetsGroups.vue'));
 Vue.component('comparefriend', require('./components/CompareFriend.vue'));
 Vue.component('managegroup', require('./components/ManageGroup.vue'));
+Vue.component('select-ranking', require('./components/Ranking.vue'));
 
 const app = new Vue({
     el: '#app',

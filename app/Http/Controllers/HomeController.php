@@ -45,7 +45,6 @@ class HomeController extends Controller
                                 ->select( 'name' )
                                 ->where( 'user_create_id', $user->id )
                                 ->get();
-                // VERIFICAR SE REALMENTE PRECISA DAR GET AQUI
             }
             else {
                 $bet_groups = null;
@@ -78,9 +77,17 @@ class HomeController extends Controller
                                     ->orderBy( 'mat.match_date', 'asc' )
                                     ->get();
 
+            // get total score
             $total_score = DB::table( 'bets' )
                                 ->where( 'user_id', '=', $user->id )
                                 ->sum( 'score' );
+
+            // update user total score
+            if ( $total_score >= 0 ) {
+                DB::table( 'users' )
+                    ->where( 'id', $user->id )
+                    ->update([ 'total_score' => $total_score ]);
+            }
 
             return view( 'home' )->with([
                                     'bet_groups'        => $bet_groups,

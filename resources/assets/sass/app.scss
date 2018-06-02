@@ -8,6 +8,9 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+.fntsz26 { font-size: 26px; }
+.fntsz12 { font-size: 12px; }
+
 .select {
     cursor: pointer;
 }
@@ -195,4 +198,27 @@ footer {
     width: 100%;
     padding: 0.25em;
     font-size: 12px;
+}
+
+// ranking page
+.ranking {
+    width: 100%;
+    display: flex;
+    font-size: 10px;
+    align-items: center;
+}
+.ranking-item {
+    padding: 0.5em 0.25em;
+}
+.ranking-item-us {
+    width: 55%;
+    padding-left: 1em;
+    word-wrap: break-word;
+}
+.ranking-item-pt {
+    width: 15%;
+    text-align: center;
+}
+.color-blk {
+    color: #000;
 }
