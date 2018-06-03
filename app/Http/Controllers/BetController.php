@@ -76,7 +76,7 @@ class BetController extends Controller
     /*
      * view for compare bet with friend's bet
     */
-    public function compareView ()
+    public function compareView()
     {
         $user_id = auth()->user()->id;
 
@@ -121,13 +121,16 @@ class BetController extends Controller
     /*
      * get friends for compare
     */
-    public function search ( $name )
+    public function search( $name )
     {
         $user = auth()->user();
 
         // get friends
         $response = DB::table( 'users as us' )
-                        ->select( 'us.username as name' )
+                        ->select(
+                            'us.id as user_id',
+                            'us.username as name'
+                        )
                         ->where([
                             [ 'us.username', 'LIKE', '%'.$name.'%' ],
                             [ 'us.id', '<>', $user->id ]

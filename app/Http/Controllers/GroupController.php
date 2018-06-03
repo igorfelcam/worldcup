@@ -263,13 +263,12 @@ class GroupController extends Controller
                                 ->count();
 
         $bet_groups = DB::table( 'bets_groups' )
-                        ->select( 'name' )
+                        ->select( 'id','name' )
                         ->where( 'user_create_id', $user_id )
                         ->get();
-        $bet_groups = json_encode( $bet_groups );
 
         return view( 'manage' )->with([
-                            'bet_groups'    => $bet_groups,
+                            'bet_groups'    => json_encode( $bet_groups ),
                             'notifications' => $notifications
                         ]);
     }
@@ -438,39 +437,63 @@ class GroupController extends Controller
         return $ranking;
     }
 
+    // search users in bet group
+    public function usersGroup( $group ) {
+        $response = DB::table( 'user_bets_groups as ubg' )
+                        ->select(
+                            'ubg.id as id',
+                            'ubg.bets_group_id as group_id',
+                            'usr.id as user_id',
+                            'usr.username  as username'
+                        )
+                        ->join( 'users as usr', 'ubg.user_id', '=', 'usr.id' )
+                        ->where( 'bets_group_id', $group )
+                        ->get();
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            'response' => $response
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    // include user in bet group
+    public function includeUserGroup( $user, $group ) {
+        if ( $user && $group ) {
+            $exist_user = DB::table( 'user_bets_groups' )
+                                ->where([
+                                    [ 'user_id', $user ],
+                                    [ 'bets_group_id', $group ]
+                                ])
+                                ->exists();
+            if ( !$exist_user ) {
+                DB::table( 'user_bets_groups' )
+                    ->insert([
+                        'user_id'       => $user,
+                        'bets_group_id' => $group
+                    ]);
+            }
+        }
+        return;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    // remove user in bet group
+    public function removeUserGroup( $id, $group, $user ) {
+        $exist_user = DB::table( 'bets_groups' )
+                            ->where([
+                                [ 'id', $group ],
+                                [ 'user_create_id', $user ]
+                            ])
+                            ->exists();
+
+        if ( $id && $group && !$exist_user ) {
+            $exist_id = DB::table( 'user_bets_groups' )
+                                ->where( 'id', $id )
+                                ->exists();
+            if ( $exist_id ) {
+                DB::table( 'user_bets_groups' )
+                    ->where( 'id', $id )
+                    ->delete();
+            }
+        }
+        return;
     }
 }

@@ -1,139 +1,145 @@
 <template lang="html">
-    <div class="form-group">
-        <div>
-            <!-- <input
+    <div class="">
+
+        <div class="form-group">
+            <select
+                v-model="select_group"
                 class="form-control"
-                name="searchfriend"
+            >
+                <option disabled>Selecione o grupo de aposta:</option>
+                <option v-for="group in groups" :value="group.id">
+                    {{ group.name }}
+                </option>
+            </select>
+            <hr></hr>
+
+            <input
+                v-if="select_group"
                 type="text"
-                placeholder="Nome de usuário do amigo"
-                v-model="friend"
-                @keyup="searchFriends()"
-                required
-                autofocus
-            /> -->
+                placeholder="Pesquise por um amigo"
+                class="form-control"
+                v-model="username"
+            >
 
-            <div v-if="groups != null" class="">
-
-                <div v-for="group in groups" >
-                    <div class="panel-groups">
-                        <div class="item-groups">
-                            {{ group.name }}
-                        </div>
-                        <div class="item-groups text-right">
-                            <input type="text"
-                            class="form-control"
-                            name=""
-                            v-model="friend[ group.name ]"
-                            @keyup="searchFriends( group.name )"
-                            placeholder="Buscar amigos"
-                            >
-                        </div>
-                    </div>
-
-                    <!-- NÃO ESTÁ ATUALIZANDO FOR NA HORA -->
-                    <!-- **** AJUSTAR **** -->
-                    {{ results_friends[ group.name ] }}
-
-                    <div class="row list-results text-center"
-                        v-if="results_friends[ group.name ]"
-                        v-for="friend in results_friends[ group.name ]"
+            <div
+                v-if="users"
+                v-for="user in users"
+                class="panel-users"
+            >
+                <div class="panel-users-item">
+                    {{ user.name }}
+                </div>
+                <div class="panel-users-item text-right">
+                    <button
+                        type="button"
+                        name="button"
+                        class="btn btn-success"
+                        @click="includeUserGroup( user.user_id, select_group )"
                     >
-                        <div class="col list-results-item">
-                            <span>{{ friend.name }}</span>
-                        </div>
-
-                        <div class="col list-results-item-btn text-right">
-
-                        </div>
-                    </div>
-
+                    Incluir
+                </button>
                 </div>
             </div>
         </div>
+
+        <hr v-if="select_group && users_group">
+        <div
+            v-if="select_group && users_group"
+            v-for="user in users_group"
+            class="panel-users"
+        >
+            <div class="panel-users-item">
+                {{ user.username }}
+            </div>
+            <div class="panel-users-item text-right">
+                <button
+                    type="button"
+                    name="button"
+                    class="btn btn-primary"
+                    @click="removeUserGroup( user.id, select_group, user.user_id )"
+                >
+                    Remover
+                </button>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script>
-
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use( VueAxios, axios )
-
 export default {
-    props: [ 'groups' ],
+    props: [ "groups" ],
     data () {
         return {
-            response: {},
-            friend: [],
-            results_friends: []
+            select_group: null,
+            users_group: [],
+            username: null,
+            users: []
+        }
+    },
+    watch: {
+        select_group: function () {
+            if ( this.select_group ) {
+                this.searchGroup()
+            }
+        },
+        username: function () {
+            if ( this.username ) {
+                this.searchUser()
+            }
+            else {
+                this.users = null
+            }
         }
     },
     methods: {
-        // search friends
-        searchFriends ( group ) {
-            if ( this.friend[ group ] ) {
-                Vue.axios.get( '/api/comparefriend/' + this.friend[ group ] )
-                    .then( response => {
-                        // friends
-                        this.results_friends[ group ] = response.data.friends.data
-
-                        console.log(this.results_friends[ group ]);
-                        // user id
-                        // this.user_id = response.data.user.id
-                    })
-                    .catch( e => {
-                        console.log( "Error: " + e )
-                    })
-            }
-            else {
-                this.results_friends[ group ] = null
-            }
-
-            console.log(this.results_friends[ group ]);
+        searchGroup: function () {
+            Vue.axios.get( '/api/usrgroup/' + this.select_group )
+            .then( response => {
+                // current
+                this.users_group = response.data.response
+            })
+            .catch( e => {
+                console.log( "Error: " + e )
+            })
         },
+        searchUser: function () {
+            Vue.axios.get( 'api/comparefriend/' + this.username )
+            .then( response => {
+                // current
+                this.users = response.data.friends.data
+            })
+            .catch( e => {
+                console.log( "Error: " + e )
+            })
+        },
+        includeUserGroup: function ( user, group ) {
+            if ( user && group ) {
+                Vue.axios.get( 'api/usrgroupins/' + user + '/' + group )
+                .then( response => {
+                    // current
+                    this.searchGroup()
+                })
+                .catch( e => {
+                    console.log( "Error: " + e )
+                })
+            }
+        },
+        removeUserGroup: function ( id, group, user ) {
+            if ( id && group && user ) {
+                Vue.axios.get( 'api/usrgrouprem/' + id + '/' + group + '/' + user )
+                .then( response => {
+                    // current
+                    this.searchGroup()
+                })
+                .catch( e => {
+                    console.log( "Error: " + e )
+                })
+            }
+        }
     }
 }
 </script>
 
 <style lang="css">
-    /* .list-results {
-        display: flex;
-        padding: 0.5em;
-        margin: 0.5em;
-        font-size: 14px;
-        border: 1px solid #636b6f;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    .list-results:hover {
-        background-color: #d0dce2;
-    }
-    .list-results span {
-        width: 100%;
-        user-select: none;
-    }
-    .bets-us {
-        font-size: 12px;
-        font-weight: bold;
-    }
-    .teams {
-        width: 50%;
-        text-align: center;
-    }
-    .compare {
-        margin: 1em 0;
-        padding-top: 0.5em;
-        font-size: 10px;
-        border-top: 1px solid #d3e0e9;
-    }
-    .compare-teams {
-        display: flex;
-        font-size: 10px;
-    }
-    .compare-teams-item {
-        padding: 0 0.025em;
-        display: inline-block;
-    }
-    .item { padding: 0 1em; } */
 </style>

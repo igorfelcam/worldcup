@@ -49,3 +49,9 @@ Route::get( 'api/getcompare/{friend}', 'BetController@getCompare' )->name( 'getc
 Route::get( '/mbg', 'GroupController@managePage' )->name( 'mbg' );
 // ranking bet group
 Route::get( '/betgroup', 'GroupController@showBetGroup' )->name( 'betgroup' );
+// get users of bet group
+Route::get( 'api/usrgroup/{id}', 'GroupController@usersGroup' )->name( 'usrgroup' );
+// include user in bet group
+Route::get( 'api/usrgroupins/{user}/{group}', 'GroupController@includeUserGroup' )->name( 'usrgroupins' );
+// remove user in bet group
+Route::get( 'api/usrgrouprem/{id}/{group}/{user}', 'GroupController@removeUserGroup' )->name( 'usrgrouprem' );
