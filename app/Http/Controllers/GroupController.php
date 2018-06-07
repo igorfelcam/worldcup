@@ -86,6 +86,10 @@ class GroupController extends Controller
                     'user_create_id'    => $user->id,
                     'name'              => $name_bet_group
                 ]);
+            // set not view create bet group in start
+            DB::table( 'users' )
+                ->where( 'id', $user->id )
+                ->update([ 'view_create_group' => 0 ]);
             // relationship to betting groups created with the creator user
             $bet_group_id = DB::table( 'bets_groups' )
                                 ->select( 'id' )

@@ -12,12 +12,12 @@ class BetsTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table( 'bets' )->insert([
-            'user_id'           => 1,
-            'matches_soccer_id' => 1,
-            'first_team_goals'  => 2,
-            'second_team_goals' => 3,
-            'score'             => null
-        ]);
+        // DB::table( 'bets' )->insert([
+        //     'user_id'           => 1,
+        //     'matches_soccer_id' => 1,
+        //     'first_team_goals'  => 2,
+        //     'second_team_goals' => 3,
+        //     'score'             => null
+        // ]);
     }
 }
