@@ -7,7 +7,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Criar grupo de apostas</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('cbg') }}">
+                    <div class="form-horizontal">
+                        {{-- action="{{ route('cbg') }}" --}}
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('namegroup') ? ' has-error' : '' }}">
@@ -22,6 +23,7 @@
                                     placeholder="Nome do grupo"
                                     required
                                     autofocus
+                                    v-model="namegroup"
                                 >
 
                                 @if ($errors->has('namegroup'))
@@ -34,12 +36,12 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" @click="checkok">
                                     Criar
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <div class="panel-footer">

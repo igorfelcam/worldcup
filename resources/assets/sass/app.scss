@@ -249,3 +249,24 @@ footer {
 .panel-users-item {
     width: 50%;
 }
+
+// check ok
+.checkokimg {
+    display: none;
+}
+.checkok {
+    position: absolute;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    display: inline-flex;
+    align-items: center;
+    background-color: #fff;
+    opacity: .9;
+}
+.checkokimgshow {
+    display: inline-flex;
+    width: 80vw;
+    margin: 0 auto;
+    border-radius: 12px;
+}

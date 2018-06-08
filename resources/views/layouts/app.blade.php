@@ -17,6 +17,13 @@
 </head>
 <body>
     <div id="app">
+
+        <div v-bind:class="{ checkok: check }">
+            <img class="checkokimg"
+                v-bind:class="{ checkokimgshow: check }"
+                src="{{ url( '/img/check-ok.gif' ) }}" alt="">
+        </div>
+
         <nav class="navbar navbar-default navbar-light bg-light justify-content-between">
             {{-- <a class="navbar-brand">Navbar</a> --}}
             <span class="navbar-brand padding-img">

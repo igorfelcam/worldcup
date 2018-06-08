@@ -8645,3 +8645,31 @@ footer {
   width: 50%;
 }
 
+.checkokimg {
+  display: none;
+}
+
+.checkok {
+  position: absolute;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  opacity: .9;
+}
+
+.checkokimgshow {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 80vw;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+

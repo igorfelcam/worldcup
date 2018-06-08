@@ -12396,11 +12396,31 @@ Vue.component('notifications', __webpack_require__(63));
 var app = new Vue({
     el: '#app',
     data: {
+        namegroup: null,
+        check: false,
         showNow: false,
         adc_friend: null,
         results_adc_friends: []
     },
     methods: {
+        // check ok
+        checkok: function checkok() {
+            var _this = this;
+
+            if (this.namegroup != null && this.namegroup != '' && this.namegroup != ' ') {
+                this.check = true;
+                setTimeout(function () {
+                    return axios.post('/cbg', { namegroup: _this.namegroup }).then(function (response) {
+                        // current
+                        console.log("here");
+                        window.location = window.location.origin + '/home';
+                    }).catch(function (e) {
+                        console.log("Error: " + e);
+                    });
+                }, 1200);
+            }
+        },
+
         // show the menu
         showMenu: function showMenu() {
             this.showNow = !this.showNow;
