@@ -59,6 +59,7 @@ const app = new Vue({
             if ( /[0-9]/.test( event.target.value ) ) {
                 // console.log( "true" );
                 Vue.axios.get( '/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
+                // Vue.axios.get( '/worldcup/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
                     .then( response => {
                         console.log( 'Maked bet' )
                     })

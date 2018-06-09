@@ -95,6 +95,7 @@ export default {
     methods: {
         searchGroup: function () {
             Vue.axios.get( '/api/usrgroup/' + this.select_group )
+            // Vue.axios.get( '/worldcup/api/usrgroup/' + this.select_group )
             .then( response => {
                 // current
                 this.users_group = response.data.response
@@ -105,6 +106,7 @@ export default {
         },
         searchUser: function () {
             Vue.axios.get( 'api/comparefriend/' + this.username )
+            // Vue.axios.get( '/worldcup/api/comparefriend/' + this.username )
             .then( response => {
                 // current
                 this.users = response.data.friends.data
@@ -116,6 +118,7 @@ export default {
         includeUserGroup: function ( user, group ) {
             if ( user && group ) {
                 Vue.axios.get( 'api/usrgroupins/' + user + '/' + group )
+                // Vue.axios.get( '/worldcup/api/usrgroupins/' + user + '/' + group )
                 .then( response => {
                     // current
                     this.searchGroup()
@@ -128,6 +131,7 @@ export default {
         removeUserGroup: function ( id, group, user ) {
             if ( id && group && user ) {
                 Vue.axios.get( 'api/usrgrouprem/' + id + '/' + group + '/' + user )
+                // Vue.axios.get( '/worldcup/api/usrgrouprem/' + id + '/' + group + '/' + user )
                 .then( response => {
                     // current
                     this.searchGroup()

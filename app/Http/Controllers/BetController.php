@@ -20,7 +20,7 @@ class BetController extends Controller
         $user = auth()->user();
 
         // valid number
-        $valid = preg_match( "/[0-9]/", $bet_value );
+        $valid = preg_match( "/^[0-9]+$/", $bet_value );
 
         if ( $valid ) {
             // verify bet date

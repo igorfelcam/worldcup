@@ -35,6 +35,7 @@ export default {
         acept ( inv_id, group_id, user_id ) {
             if ( inv_id && group_id && user_id ) {
                 Vue.axios.get( '/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id )
+                // Vue.axios.get( '/worldcup/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id )
                     .then( response => {
                         // current
                         this.notif = response.data
@@ -52,6 +53,7 @@ export default {
         recused ( inv_id ) {
             if ( inv_id ) {
                 Vue.axios.get( '/api/ntfrecused/' + inv_id )
+                // Vue.axios.get( '/worldcup/api/ntfrecused/' + inv_id )
                     .then( response => {
                         // current
                         this.notif = response.data

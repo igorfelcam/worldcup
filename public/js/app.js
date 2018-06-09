@@ -12431,7 +12431,9 @@ var app = new Vue({
             // valid number with regex
             if (/[0-9]/.test(event.target.value)) {
                 // console.log( "true" );
-                Vue.axios.get('/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value).then(function (response) {
+                Vue.axios.get('/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value)
+                // Vue.axios.get( '/worldcup/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
+                .then(function (response) {
                     console.log('Maked bet');
                 }).catch(function (e) {
                     console.log("Error: " + e);
@@ -43613,7 +43615,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .list-results {\n    display: flex;\n    padding: 0.25em;\n    font-size: 12px;\n}\n.list-results-item {\n    width: 60%;\n}\n.list-results-item-btn {\n    width: 40%;\n}\n.list-results-item-btn button {\n    width: 100%;\n    padding: 0.25em;\n    font-size: 12px;\n} */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .list-results {\n    display: flex;\n    padding: 0.25em;\n    font-size: 12px;\n}\n.list-results-item {\n    width: 60%;\n}\n.list-results-item-btn {\n    width: 40%;\n}\n.list-results-item-btn button {\n    width: 100%;\n    padding: 0.25em;\n    font-size: 12px;\n} */\n", ""]);
 
 // exports
 
@@ -43744,7 +43746,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 
             // console.log(this.group);
             if (this.group.length > 0) {
-                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/search/' + this.group).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/search/' + this.group)
+                // Vue.axios.get( '/worldcup/api/search/' + this.group )
+                .then(function (response) {
                     // groups
                     _this.results_groups = response.data.groups.data;
                     // user id
@@ -43761,7 +43765,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
         enterGroup: function enterGroup(group_id) {
             // console.log( "here man!" + this.user_id + " group " + group_id );
             if (this.user_id) {
-                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/enterGroup/' + group_id + '/' + this.user_id).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/enterGroup/' + group_id + '/' + this.user_id)
+                // Vue.axios.get( '/worldcup/api/enterGroup/' + group_id + '/' + this.user_id )
+                .then(function (response) {
                     console.log('Solicited enter group');
                 }).catch(function (e) {
                     console.log("Error: " + e);
@@ -43771,7 +43777,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
         exitGroup: function exitGroup(group_id) {
             // console.log( "here" + group_id );
             if (this.user_id) {
-                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/exitGroup/' + group_id + '/' + this.user_id).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/exitGroup/' + group_id + '/' + this.user_id)
+                // Vue.axios.get( '/worldcup/api/exitGroup/' + group_id + '/' + this.user_id )
+                .then(function (response) {
                     console.log('Exit group sucess');
                 }).catch(function (e) {
                     console.log("Error: " + e);
@@ -44097,7 +44105,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
             var _this = this;
 
             if (this.friend.length > 0) {
-                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/comparefriend/' + this.friend).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/comparefriend/' + this.friend)
+                // Vue.axios.get( '/worldcup/api/comparefriend/' + this.friend )
+                .then(function (response) {
                     // friends
                     _this.results_friends = response.data.friends.data;
                     // user id
@@ -44119,7 +44129,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
             this.friend = null;
             this.results_friends = null;
 
-            __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/getcompare/' + username).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.get('/api/getcompare/' + username)
+            // Vue.axios.get( '/worldcup/api/getcompare/' + username )
+            .then(function (response) {
                 // friends
                 _this2.results_bets = response.data.friends;
                 _this2.user_username = response.data.user.username;
@@ -44412,7 +44424,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -44521,7 +44533,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchGroup: function searchGroup() {
             var _this = this;
 
-            Vue.axios.get('/api/usrgroup/' + this.select_group).then(function (response) {
+            Vue.axios.get('/api/usrgroup/' + this.select_group)
+            // Vue.axios.get( '/worldcup/api/usrgroup/' + this.select_group )
+            .then(function (response) {
                 // current
                 _this.users_group = response.data.response;
             }).catch(function (e) {
@@ -44531,7 +44545,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchUser: function searchUser() {
             var _this2 = this;
 
-            Vue.axios.get('api/comparefriend/' + this.username).then(function (response) {
+            Vue.axios.get('api/comparefriend/' + this.username)
+            // Vue.axios.get( '/worldcup/api/comparefriend/' + this.username )
+            .then(function (response) {
                 // current
                 _this2.users = response.data.friends.data;
             }).catch(function (e) {
@@ -44542,7 +44558,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             if (user && group) {
-                Vue.axios.get('api/usrgroupins/' + user + '/' + group).then(function (response) {
+                Vue.axios.get('api/usrgroupins/' + user + '/' + group)
+                // Vue.axios.get( '/worldcup/api/usrgroupins/' + user + '/' + group )
+                .then(function (response) {
                     // current
                     _this3.searchGroup();
                 }).catch(function (e) {
@@ -44554,7 +44572,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this4 = this;
 
             if (id && group && user) {
-                Vue.axios.get('api/usrgrouprem/' + id + '/' + group + '/' + user).then(function (response) {
+                Vue.axios.get('api/usrgrouprem/' + id + '/' + group + '/' + user)
+                // Vue.axios.get( '/worldcup/api/usrgrouprem/' + id + '/' + group + '/' + user )
+                .then(function (response) {
                     // current
                     _this4.searchGroup();
                 }).catch(function (e) {
@@ -45073,7 +45093,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -45123,7 +45143,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             if (inv_id && group_id && user_id) {
-                Vue.axios.get('/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id).then(function (response) {
+                Vue.axios.get('/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id)
+                // Vue.axios.get( '/worldcup/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id )
+                .then(function (response) {
                     // current
                     _this.notif = response.data;
 
@@ -45141,7 +45163,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             if (inv_id) {
-                Vue.axios.get('/api/ntfrecused/' + inv_id).then(function (response) {
+                Vue.axios.get('/api/ntfrecused/' + inv_id)
+                // Vue.axios.get( '/worldcup/api/ntfrecused/' + inv_id )
+                .then(function (response) {
                     // current
                     _this2.notif = response.data;
 

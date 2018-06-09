@@ -20,8 +20,10 @@ Auth::routes();
 Route::get( '/notf', 'NotificationController@index' )->name( 'notf' );
 // notification acept
 Route::get( 'api/ntfacept/{inv_id}/{group_id}/{user_id}', 'NotificationController@acept' )->name( 'ntfacept' );
+// Route::get( '/worldcup/api/ntfacept/{inv_id}/{group_id}/{user_id}', 'NotificationController@acept' )->name( 'ntfacept' );
 // notification recused
 Route::get( 'api/ntfrecused/{inv_id}', 'NotificationController@recused' )->name( 'ntfrecused' );
+// Route::get( '/worldcup/api/ntfrecused/{inv_id}', 'NotificationController@recused' )->name( 'ntfrecused' );
 // bets page
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // false view create group
@@ -33,25 +35,37 @@ Route::post( '/cbg', 'GroupController@create' )->name( 'cbg' );
 Route::get( '/sbg', 'GroupController@searchPage' )->name( 'sbg' );
 // search bet groups
 Route::get( 'api/search/{name}', 'GroupController@search' )->name( 'search' );
+// Route::get( '/worldcup/api/search/{name}', 'GroupController@search' )->name( 'search' );
 // ask invit enter bet group
 Route::get( 'api/enterGroup/{group_id}/{user_id}', 'GroupController@enterGroup' )->name( 'enterGroup' );
+// Route::get( '/worldcup/api/enterGroup/{group_id}/{user_id}', 'GroupController@enterGroup' )->name( 'enterGroup' );
 // exit bet group
 Route::get( 'api/exitGroup/{group_id}/{user_id}', 'GroupController@exitGroup' )->name( 'exitGroup' );
+// Route::get( '/worldcup/api/exitGroup/{group_id}/{user_id}', 'GroupController@exitGroup' )->name( 'exitGroup' );
 // make bet
 Route::get( 'api/makeBet/{match_id}/{team}/{bet_value}', 'BetController@create' )->name( 'makeBet' );
+// Route::get( '/worldcup/api/makeBet/{match_id}/{team}/{bet_value}', 'BetController@create' )->name( 'makeBet' );
 // compare friend
 Route::get( 'compare', 'BetController@compareView' )->name( 'compare' );
 // get friends
 Route::get( 'api/comparefriend/{name}', 'BetController@search' )->name( 'comparefriend' );
+// Route::get( '/worldcup/api/comparefriend/{name}', 'BetController@search' )->name( 'comparefriend' );
 // get compare
 Route::get( 'api/getcompare/{friend}', 'BetController@getCompare' )->name( 'getcompare' );
+// Route::get( '/worldcup/api/getcompare/{friend}', 'BetController@getCompare' )->name( 'getcompare' );
 // manage page bet group
 Route::get( '/mbg', 'GroupController@managePage' )->name( 'mbg' );
 // ranking bet group
 Route::get( '/betgroup', 'GroupController@showBetGroup' )->name( 'betgroup' );
 // get users of bet group
 Route::get( 'api/usrgroup/{id}', 'GroupController@usersGroup' )->name( 'usrgroup' );
+// Route::get( '/worldcup/api/usrgroup/{id}', 'GroupController@usersGroup' )->name( 'usrgroup' );
 // include user in bet group
 Route::get( 'api/usrgroupins/{user}/{group}', 'GroupController@includeUserGroup' )->name( 'usrgroupins' );
+// Route::get( '/worldcup/api/usrgroupins/{user}/{group}', 'GroupController@includeUserGroup' )->name( 'usrgroupins' );
 // remove user in bet group
 Route::get( 'api/usrgrouprem/{id}/{group}/{user}', 'GroupController@removeUserGroup' )->name( 'usrgrouprem' );
+// Route::get( '/worldcup/api/usrgrouprem/{id}/{group}/{user}', 'GroupController@removeUserGroup' )->name( 'usrgrouprem' );
+// results
+Route::get( '/matches', 'AdmController@index' )->name( 'matches' );
+Route::post( '/admResults', 'AdmController@results' )->name( 'admResults' );
