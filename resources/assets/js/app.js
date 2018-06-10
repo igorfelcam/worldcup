@@ -38,10 +38,12 @@ const app = new Vue({
                 this.check = true
                 setTimeout(
                     () => axios.post( '/cbg', { namegroup: this.namegroup })
+                    // () => axios.post( '/worldcup/cbg', { namegroup: this.namegroup })
                             .then( response => {
                                 // current
                                 console.log("here")
                                 window.location = window.location.origin + '/home'
+                                // window.location = window.location.origin + '/worldcup/home'
                             })
                             .catch( e => {
                                 console.log( "Error: " + e )

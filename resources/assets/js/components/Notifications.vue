@@ -42,6 +42,7 @@ export default {
 
                         if ( this.notif.length == 0 ) {
                             window.location = window.location.origin + '/home'
+                            // window.location = window.location.origin + '/worldcup/home'
                         }
                     })
                     .catch( e => {
@@ -60,6 +61,7 @@ export default {
 
                         if ( this.notif.length == 0 ) {
                             window.location = window.location.origin + '/home'
+                            // window.location = window.location.origin + '/worldcup/home'
                         }
                     })
                     .catch( e => {

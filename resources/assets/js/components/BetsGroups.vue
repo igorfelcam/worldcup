@@ -125,20 +125,4 @@ export default {
 </script>
 
 <style lang="css">
-    /* .list-results {
-        display: flex;
-        padding: 0.25em;
-        font-size: 12px;
-    }
-    .list-results-item {
-        width: 60%;
-    }
-    .list-results-item-btn {
-        width: 40%;
-    }
-    .list-results-item-btn button {
-        width: 100%;
-        padding: 0.25em;
-        font-size: 12px;
-    } */
 </style>
