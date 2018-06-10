@@ -16,6 +16,8 @@ Route::get( '/', function () {
 
 Auth::routes();
 
+// bets page
+Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // notifications
 Route::get( '/notf', 'NotificationController@index' )->name( 'notf' );
 // notification acept
@@ -24,8 +26,6 @@ Route::get( 'api/ntfacept/{inv_id}/{group_id}/{user_id}', 'NotificationControlle
 // notification recused
 Route::get( 'api/ntfrecused/{inv_id}', 'NotificationController@recused' )->name( 'ntfrecused' );
 // Route::get( '/worldcup/api/ntfrecused/{inv_id}', 'NotificationController@recused' )->name( 'ntfrecused' );
-// bets page
-Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // false view create group
 Route::get( '/notGroup', 'HomeController@notViewCreateGroup' )->name( 'notGroup' );
 // create bet group

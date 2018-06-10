@@ -35,6 +35,9 @@ class HomeController extends Controller
              * COLOCAR NA MESMA TELA OS JOGOS QUE FOREM ACONTECENDO
             */
 
+            // betting scoring
+            $this->bettingScoring();
+
             // verify exist user's bet groups
             $exist_bet_groups = DB::table( 'bets_groups' )
                                     ->select( 'name' )
@@ -119,5 +122,67 @@ class HomeController extends Controller
             ->update([ 'view_create_group' => false ]);
 
         return redirect()->route('home');
+    }
+
+    /*
+     * betting scoring
+     */
+    public function bettingScoring()
+    {
+        $user = auth()->user();
+
+        // date now
+        date_default_timezone_set('America/Sao_Paulo');
+        $date_now = date('Y-m-d H:i:s');
+
+        $past_matches = DB::table( 'matches_soccers as ms' )
+                            ->select(
+                                'ms.id as match_id',
+                                'ms.first_team_goals as mat_first_team_goals',
+                                'ms.second_team_goals as mat_second_team_goals',
+                                'bt.id as bet_id',
+                                'bt.user_id as user_id',
+                                // 'bt.matches_soccer_id',
+                                'bt.first_team_goals as bet_first_team_goals',
+                                'bt.second_team_goals as bet_second_team_goals',
+                                'bt.score as bet_score'
+                            )
+                            ->join( 'bets as bt', 'ms.id', '=', 'bt.matches_soccer_id' )
+                            ->where([
+                                [ 'ms.match_date', '<', $date_now ],
+                                [ 'bt.user_id', '=', $user->id ]
+                            ])
+                            ->get();
+
+        foreach ( $past_matches as $match ) {
+            // reset score
+            $score = 0;
+            // 3 - exactly correct
+            if (( $match->mat_first_team_goals == $match->bet_first_team_goals ) && ( $match->mat_second_team_goals == $match->bet_second_team_goals )) {
+                $score = 3;
+            }
+            // 1 - tie situation
+            elseif (( $match->mat_first_team_goals == $match->mat_second_team_goals ) && ( $match->bet_first_team_goals == $match->bet_second_team_goals )) {
+                $score = 1;
+            }
+            // 1 - first team wins
+            elseif (( $match->mat_first_team_goals > $match->mat_second_team_goals ) && ( $match->bet_first_team_goals > $match->bet_second_team_goals )) {
+                $score = 1;
+            }
+            // 1 - second team wins
+            elseif (( $match->mat_first_team_goals < $match->mat_second_team_goals ) && ( $match->bet_first_team_goals < $match->bet_second_team_goals )) {
+                $score = 1;
+            }
+            // 0- lose
+            else {
+                $score = 0;
+            }
+
+            // update score
+            DB::table( 'bets' )
+                ->where( 'id', $match->bet_id )
+                ->update([ 'score' => $score ]);
+        }
+        return;
     }
 }

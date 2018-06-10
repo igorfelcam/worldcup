@@ -21,12 +21,11 @@ class AdmController extends Controller
     /**
      * Update matches results
      */
-     public function index()
+    public function index()
     {
         $user = auth()->user();
 
         if (( $user->id == 1 ) && ( $user->username == 'igorfelcam' )) {
-
             // matches soccers
             $matches_soccers = DB::table( 'matches_soccers as mat' )
                                     ->select(
@@ -49,8 +48,6 @@ class AdmController extends Controller
                                     ->orderBy( 'mat.match_date', 'asc' )
                                     ->get();
 
-            // $matches = DB::table( 'matches_soccers' );
-
             return view( 'adm_matches' )->with([
                                     'matches_soccers' => $matches_soccers,
                                 ]);
@@ -64,7 +61,6 @@ class AdmController extends Controller
     /**
      * Update matches results
      */
-    // public function results( $id_match, $first_goal, $second_goal )
     public function results( Request $request )
     {
         $user = auth()->user();
@@ -92,11 +88,10 @@ class AdmController extends Controller
             if ( $team_first != null && $team_second != null ) {
                 if (
                     ( $match_id != null ) &&
-                    ( $match_date > $date_now ) && // TROCAR O SINAL AQUI Ó
+                    ( $match_date < $date_now ) &&
                     ( $valid_first || $team_first == null ) &&
                     ( $valid_second || $team_second == null )
                 ) {
-                    echo "here";
                     if ( $team_first == null ) {
                         $team_first = 0;
                     }
