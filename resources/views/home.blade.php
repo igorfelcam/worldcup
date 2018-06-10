@@ -1,3 +1,9 @@
+@php
+    // date now
+    date_default_timezone_set('America/Sao_Paulo');
+    $date_now = date('d-m-Y H:i');
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -10,7 +16,6 @@
                 </div>
                 <div class="panel-body">
                     @foreach ( $matches_soccers as $match )
-
                         <div class="panel-matches">
                             <p>{{ $match->match_date }} - {{ $match->type_name }}</p>
                             <div class="panel-matches-mat">
@@ -51,8 +56,25 @@
                                     <b>{{ $match->score }}</b>
                                 </span>
                             </div>
-                        </div>
 
+                            @if ( $match->match_date < $date_now )
+                                <div class="panel-matches-mat padtop-1">
+                                    <span>
+                                        <div>
+                                            {{ $match->a_first_team_goals }}
+                                        </div>
+                                    </span>
+                                    <span>
+                                        x
+                                    </span>
+                                    <span>
+                                        <div>
+                                            {{ $match->b_second_team_goals }}
+                                        </div>
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
                     @endforeach
                 </div>
             </div>
