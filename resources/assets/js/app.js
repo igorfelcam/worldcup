@@ -29,7 +29,8 @@ const app = new Vue({
         check: false,
         showNow: false,
         adc_friend: null,
-        results_adc_friends: []
+        results_adc_friends: [],
+        isActiveHide: true
     },
     methods: {
         // check ok

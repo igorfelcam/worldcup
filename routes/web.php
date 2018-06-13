@@ -69,3 +69,5 @@ Route::get( 'api/usrgrouprem/{id}/{group}/{user}', 'GroupController@removeUserGr
 // results
 Route::get( '/matches', 'AdmController@index' )->name( 'matches' );
 Route::post( '/admResults', 'AdmController@results' )->name( 'admResults' );
+// delete group
+Route::get( 'api/removeGroup/{id}', 'GroupController@remGroup' )->name( 'removeGroup' );

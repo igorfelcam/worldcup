@@ -17,7 +17,7 @@
             <div class="row list-results"
                 v-for="group in results_groups"
             >
-                <div class="col list-results-item">{{ group.group_name }}</div>
+                <div class="col list-results-item"><b>{{ group.group_name }}</b> - {{ group.name_user_create }}</div>
                 <div class="col list-results-item-btn text-right">
                     <span>
                         <button class="btn btn-primary"

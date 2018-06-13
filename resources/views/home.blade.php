@@ -15,8 +15,17 @@
                     Faça sua aposta!
                 </div>
                 <div class="panel-body">
+                <button @click="isActiveHide = !isActiveHide" class="btn btn-hide">
+                    <span v-if="isActiveHide == true">Mostrar</span>
+                    <span v-else>Esconder</span>
+                    jogos anteriores
+                </button>
                     @foreach ( $matches_soccers as $match )
-                        <div class="panel-matches">
+                        <div class="panel-matches"
+                            @if ( $match->match_date < $date_now )
+                                v-bind:class="{ hide_match: isActiveHide }"
+                            @endif
+                        >
                             <p>{{ $match->match_date }} - {{ $match->type_name }}</p>
                             <div class="panel-matches-mat">
                                 <span>

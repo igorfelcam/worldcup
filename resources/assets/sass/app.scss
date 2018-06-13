@@ -210,10 +210,10 @@ footer {
     font-size: 12px;
 }
 .list-results-item {
-    width: 60%;
+    width: 70%;
 }
 .list-results-item-btn {
-    width: 40%;
+    width: 30%;
 }
 .list-results-item-btn button {
     width: 100%;
@@ -274,4 +274,13 @@ footer {
     width: 80vw;
     margin: 0 auto;
     border-radius: 12px;
+}
+
+// hide match
+.hide_match {
+    display: none;
+}
+.btn-hide {
+    width: 100%;
+    background-color: #ccc;
 }

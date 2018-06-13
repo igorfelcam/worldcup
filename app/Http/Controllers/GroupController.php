@@ -171,9 +171,11 @@ class GroupController extends Controller
                             'bg.id as group_id',
                             'bg.name as group_name',
                             'bg.user_create_id as user_create',
+                            'us.username as name_user_create',
                             DB::raw( 'case when ubg.bets_group_id = bg.id then 1 else 0 end as  user_participe' ),
                             DB::raw( 'case when inv.bets_group_id = bg.id then 1 else 0 end as user_invite' )
                         )
+                        ->join( 'users as us', 'bg.user_create_id', '=', 'us.id' )
                         ->leftJoin( 'user_bets_groups as ubg', function( $join ){
                             $join->on( 'ubg.bets_group_id', '=', 'bg.id' );
                             $join->on( 'ubg.user_id', '=', DB::raw( Auth::user()->id ) );
@@ -497,6 +499,34 @@ class GroupController extends Controller
                     ->where( 'id', $id )
                     ->delete();
             }
+        }
+        return;
+    }
+
+    // remove bet group
+    public function remGroup( $group_id )
+    {
+        $user_id = auth()->id();
+
+        $exist_group = DB::table( 'bets_groups' )
+                            ->where([
+                                [ 'id', $group_id ],
+                                [ 'user_create_id', $user_id ]
+                            ])
+                            ->exists();
+
+        if ( $group_id && $exist_group ) {
+            // delete user x bet group
+            DB::table( 'user_bets_groups' )
+                ->where( 'bets_group_id', $group_id )
+                ->delete();
+            // delete bet group
+            DB::table( 'bets_groups' )
+                ->where([
+                    [ 'id', $group_id ],
+                    [ 'user_create_id', $user_id ]
+                ])
+                ->delete();
         }
         return;
     }

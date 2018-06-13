@@ -21,6 +21,11 @@
                 v-model="username"
             >
 
+            <div v-if="select_group" class="panel-users">
+                Para excluir este grupo, clique &nbsp;
+                <span @click="deleteGroup( select_group )" class="pointer">AQUI</span>
+            </div>
+
             <div
                 v-if="users"
                 v-for="user in users"
@@ -140,10 +145,33 @@ export default {
                     console.log( "Error: " + e )
                 })
             }
+        },
+        deleteGroup: function ( group_id ) {
+            var conf = null
+            if ( group_id ) {
+                conf = confirm("Realmente deseja excluir este grupo?")
+                if ( conf == true ) {
+                    Vue.axios.get( 'api/removeGroup/' + group_id )
+                    // Vue.axios.get( '/worldcup/api/removeGroup/' + group_id )
+                    .then( response => {
+                        // current
+                        console.log( "Removed" )
+                        window.location = window.location.origin + '/mbg'
+                        // window.location = window.location.origin + '/worldcup/mbg'
+                    })
+                    .catch( e => {
+                        console.log( "Error: " + e )
+                    })
+                }
+            }
         }
     }
 }
 </script>
 
 <style lang="css">
+    .pointer {
+        cursor: pointer;
+        font-weight: bold;
+    }
 </style>
