@@ -79,6 +79,7 @@
                     @endif
                     <a href="{{ route( 'sbg' ) }}">Buscar por grupo</a>
                     <a href="{{ route( 'cbg' ) }}">Criar grupo de apostas</a>
+                    <a href="{{ route( 'inf' ) }}">Informações</a>
                     <a href="{{ route( 'logout' ) }}"
                         onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

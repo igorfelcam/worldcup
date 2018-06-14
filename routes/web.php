@@ -71,3 +71,5 @@ Route::get( '/matches', 'AdmController@index' )->name( 'matches' );
 Route::post( '/admResults', 'AdmController@results' )->name( 'admResults' );
 // delete group
 Route::get( 'api/removeGroup/{id}', 'GroupController@remGroup' )->name( 'removeGroup' );
+// page information
+Route::get( '/inf', 'HomeController@pageInformation' )->name( 'inf' );

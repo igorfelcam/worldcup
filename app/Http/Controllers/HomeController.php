@@ -187,4 +187,12 @@ class HomeController extends Controller
         }
         return;
     }
+
+    /*
+     * set fallse in view group
+    */
+    public function pageInformation()
+    {
+        return view('information');
+    }
 }

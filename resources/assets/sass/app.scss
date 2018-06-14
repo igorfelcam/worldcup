@@ -9,6 +9,7 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 .fntsz26 { font-size: 26px; }
+.fntsz18 { font-size: 18px; }
 .fntsz12 { font-size: 12px; }
 .padtop-1 {
     padding-top: 1em;
@@ -283,4 +284,19 @@ footer {
 .btn-hide {
     width: 100%;
     background-color: #ccc;
+}
+
+// information
+.text-inf {
+    padding: .9em 1.5em;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    color: #111;
+    background-color: #fff;
+}
+.mag-2 {
+    margin: 2em 0;
+}
+.pad-lk {
+    padding: 4px 6px;
 }
