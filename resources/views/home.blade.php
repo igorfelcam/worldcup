@@ -21,8 +21,13 @@
                     jogos anteriores
                 </button>
                     @foreach ( $matches_soccers as $match )
+                        @php
+                            $date = str_replace( '-', ' ', $match->match_date );
+                            $date = str_replace( '/', '-', $date );
+                            $date = date( 'd-m-Y H:i', strtotime( '+240 minute', strtotime( $date )));
+                        @endphp
                         <div class="panel-matches"
-                            @if ( $match->match_date < $date_now )
+                        @if ( $date < $date_now )
                                 v-bind:class="{ hide_match: isActiveHide }"
                             @endif
                         >
@@ -66,7 +71,7 @@
                                 </span>
                             </div>
 
-                            @if ( $match->match_date < $date_now )
+                            @if ( $date < $date_now )
                                 <div class="panel-matches-mat padtop-1">
                                     <span>
                                         <div>
