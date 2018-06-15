@@ -105,15 +105,95 @@ class AdmController extends Controller
                         $team_second = (String) $team_second;
                     }
 
+                    // update match result
                     DB::table( 'matches_soccers' )
                     ->where( 'id', $match_id )
                     ->update([
                         'first_team_goals'   => (String) $team_first,
                         'second_team_goals'  => (String) $team_second
                     ]);
+
+                    // betting scoring
+                    $this->bettingScoring();
+                    // select all users
+                    $users = DB::table( 'users' )
+                                ->select( 'id' )
+                                ->get();
+                    // get total score
+                    foreach ( $users as $us ) {
+                        $total_score = DB::table( 'bets' )
+                                            ->where( 'user_id', '=', $us->id )
+                                            ->sum( 'score' );
+                        // update user total score
+                        if ( $total_score >= 0 ) {
+                            DB::table( 'users' )
+                                ->where( 'id', $us->id )
+                                ->update([ 'total_score' => $total_score ]);
+                        }
+                    }
                 }
             }
         }
         return redirect()->route('matches');
+    }
+
+    /*
+     * betting scoring
+     */
+    public function bettingScoring()
+    {
+        // date now
+        date_default_timezone_set('America/Sao_Paulo');
+        $date_now = date('Y-m-d H:i:s');
+
+        $past_matches = DB::table( 'matches_soccers as ms' )
+                            ->select(
+                                'ms.id as match_id',
+                                'ms.first_team_goals as mat_first_team_goals',
+                                'ms.second_team_goals as mat_second_team_goals',
+                                'bt.id as bet_id',
+                                'bt.user_id as user_id',
+                                // 'bt.matches_soccer_id',
+                                'bt.first_team_goals as bet_first_team_goals',
+                                'bt.second_team_goals as bet_second_team_goals',
+                                'bt.score as bet_score'
+                            )
+                            ->join( 'bets as bt', 'ms.id', '=', 'bt.matches_soccer_id' )
+                            ->where([
+                                [ 'ms.match_date', '<', $date_now ],
+                                [ 'bt.score', '=', null ]
+                            ])
+                            ->get();
+
+        foreach ( $past_matches as $match ) {
+            // reset score
+            $score = 0;
+            // 3 - exactly correct
+            if (( $match->mat_first_team_goals == $match->bet_first_team_goals ) && ( $match->mat_second_team_goals == $match->bet_second_team_goals )) {
+                $score = 3;
+            }
+            // 1 - tie situation
+            elseif (( $match->mat_first_team_goals == $match->mat_second_team_goals ) && ( $match->bet_first_team_goals == $match->bet_second_team_goals )) {
+                $score = 1;
+            }
+            // 1 - first team wins
+            elseif (( $match->mat_first_team_goals > $match->mat_second_team_goals ) && ( $match->bet_first_team_goals > $match->bet_second_team_goals )) {
+                $score = 1;
+            }
+            // 1 - second team wins
+            elseif (( $match->mat_first_team_goals < $match->mat_second_team_goals ) && ( $match->bet_first_team_goals < $match->bet_second_team_goals )) {
+                $score = 1;
+            }
+            // 0- lose
+            else {
+                $score = 0;
+            }
+
+            // update score
+            DB::table( 'bets' )
+                ->where( 'id', $match->bet_id )
+                ->update([ 'score' => $score ]);
+        }
+        return;
     }
 }
