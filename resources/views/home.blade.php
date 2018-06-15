@@ -31,7 +31,17 @@
                                 v-bind:class="{ hide_match: isActiveHide }"
                             @endif
                         >
-                            <p>{{ $match->match_date }} - {{ $match->type_name }}</p>
+                            <p>
+                                @php
+                                    $dd = substr( $match->match_date, 0, 2 );
+                                    $mm = substr( $match->match_date, 3, 2 );
+                                    $yy = substr( $match->match_date, 6, 4 );
+                                    $hh = substr( $match->match_date, 13, 2 );
+                                    $mi = substr( $match->match_date, 16, 2 );
+                                @endphp
+                                <counter :matchdate="{ date: {{ $dd }}, month: {{ $mm }}, year: {{ $yy }}, hour: {{ $hh }}, minute: {{ $mi }} }"></counter>
+                                {{ $dd }}/{{ $mm }}/{{ $yy }} {{ $hh }}:{{ $mi }} | {{ $match->type_name }}
+                            </p>
                             <div class="panel-matches-mat">
                                 <span>
                                     {{ $match->team_a }}

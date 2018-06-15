@@ -34,15 +34,15 @@ export default {
         // acept
         acept ( inv_id, group_id, user_id ) {
             if ( inv_id && group_id && user_id ) {
-                Vue.axios.get( '/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id )
-                // Vue.axios.get( '/worldcup/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id )
+                // Vue.axios.get( '/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id )
+                Vue.axios.get( '/worldcup/api/ntfacept/' + inv_id + '/' + group_id + '/' + user_id )
                     .then( response => {
                         // current
                         this.notif = response.data
 
                         if ( this.notif.length == 0 ) {
-                            window.location = window.location.origin + '/home'
-                            // window.location = window.location.origin + '/worldcup/home'
+                            // window.location = window.location.origin + '/home'
+                            window.location = window.location.origin + '/worldcup/home'
                         }
                     })
                     .catch( e => {
@@ -53,15 +53,15 @@ export default {
         // recused
         recused ( inv_id ) {
             if ( inv_id ) {
-                Vue.axios.get( '/api/ntfrecused/' + inv_id )
-                // Vue.axios.get( '/worldcup/api/ntfrecused/' + inv_id )
+                // Vue.axios.get( '/api/ntfrecused/' + inv_id )
+                Vue.axios.get( '/worldcup/api/ntfrecused/' + inv_id )
                     .then( response => {
                         // current
                         this.notif = response.data
 
                         if ( this.notif.length == 0 ) {
-                            window.location = window.location.origin + '/home'
-                            // window.location = window.location.origin + '/worldcup/home'
+                            // window.location = window.location.origin + '/home'
+                            window.location = window.location.origin + '/worldcup/home'
                         }
                     })
                     .catch( e => {

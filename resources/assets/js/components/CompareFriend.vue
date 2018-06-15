@@ -93,8 +93,8 @@ export default {
         // search friends
         searchFriends () {
             if ( this.friend.length > 0 ) {
-                Vue.axios.get( '/api/comparefriend/' + this.friend )
-                // Vue.axios.get( '/worldcup/api/comparefriend/' + this.friend )
+                // Vue.axios.get( '/api/comparefriend/' + this.friend )
+                Vue.axios.get( '/worldcup/api/comparefriend/' + this.friend )
                     .then( response => {
                         // friends
                         this.results_friends = response.data.friends.data
@@ -117,8 +117,8 @@ export default {
             this.friend = null
             this.results_friends = null
 
-            Vue.axios.get( '/api/getcompare/' + username )
-            // Vue.axios.get( '/worldcup/api/getcompare/' + username )
+            // Vue.axios.get( '/api/getcompare/' + username )
+            Vue.axios.get( '/worldcup/api/getcompare/' + username )
                 .then( response => {
                     // friends
                     this.results_bets = response.data.friends

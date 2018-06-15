@@ -21,6 +21,7 @@ Vue.component('comparefriend', require('./components/CompareFriend.vue'));
 Vue.component('managegroup', require('./components/ManageGroup.vue'));
 Vue.component('select-ranking', require('./components/Ranking.vue'));
 Vue.component('notifications', require('./components/Notifications.vue'));
+Vue.component('counter', require('./components/Counter.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -38,13 +39,13 @@ const app = new Vue({
             if (( this.namegroup != null ) && ( this.namegroup != '' ) && ( this.namegroup != ' ' )) {
                 this.check = true
                 setTimeout(
-                    () => axios.post( '/cbg', { namegroup: this.namegroup })
-                    // () => axios.post( '/worldcup/cbg', { namegroup: this.namegroup })
+                    // () => axios.post( '/cbg', { namegroup: this.namegroup })
+                    () => axios.post( '/worldcup/cbg', { namegroup: this.namegroup })
                             .then( response => {
                                 // current
                                 console.log("here")
-                                window.location = window.location.origin + '/home'
-                                // window.location = window.location.origin + '/worldcup/home'
+                                // window.location = window.location.origin + '/home'
+                                window.location = window.location.origin + '/worldcup/home'
                             })
                             .catch( e => {
                                 console.log( "Error: " + e )
@@ -61,8 +62,8 @@ const app = new Vue({
             // valid number with regex
             if ( /[0-9]/.test( event.target.value ) ) {
                 // console.log( "true" );
-                Vue.axios.get( '/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
-                // Vue.axios.get( '/worldcup/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
+                // Vue.axios.get( '/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
+                Vue.axios.get( '/worldcup/api/makeBet/' + event.target.id + '/' + event.target.name + '/' + event.target.value )
                     .then( response => {
                         console.log( 'Maked bet' )
                     })

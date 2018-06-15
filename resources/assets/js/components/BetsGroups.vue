@@ -76,8 +76,8 @@ export default {
         searchBetsGroups () {
             // console.log(this.group);
             if ( this.group.length > 0 ) {
-                Vue.axios.get( '/api/search/' + this.group )
-                // Vue.axios.get( '/worldcup/api/search/' + this.group )
+                // Vue.axios.get( '/api/search/' + this.group )
+                Vue.axios.get( '/worldcup/api/search/' + this.group )
                     .then( response => {
                         // groups
                         this.results_groups = response.data.groups.data
@@ -97,8 +97,8 @@ export default {
         enterGroup ( group_id ) {
             // console.log( "here man!" + this.user_id + " group " + group_id );
             if ( this.user_id ) {
-                Vue.axios.get( '/api/enterGroup/' + group_id + '/' + this.user_id )
-                // Vue.axios.get( '/worldcup/api/enterGroup/' + group_id + '/' + this.user_id )
+                // Vue.axios.get( '/api/enterGroup/' + group_id + '/' + this.user_id )
+                Vue.axios.get( '/worldcup/api/enterGroup/' + group_id + '/' + this.user_id )
                     .then( response => {
                         console.log( 'Solicited enter group' )
                     })
@@ -110,8 +110,8 @@ export default {
         exitGroup ( group_id ) {
             // console.log( "here" + group_id );
             if ( this.user_id ) {
-                Vue.axios.get( '/api/exitGroup/' + group_id + '/' + this.user_id )
-                // Vue.axios.get( '/worldcup/api/exitGroup/' + group_id + '/' + this.user_id )
+                // Vue.axios.get( '/api/exitGroup/' + group_id + '/' + this.user_id )
+                Vue.axios.get( '/worldcup/api/exitGroup/' + group_id + '/' + this.user_id )
                     .then( response => {
                         console.log( 'Exit group sucess' )
                     })
