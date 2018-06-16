@@ -52,7 +52,7 @@
 
                 <p class="text-justify mag-2">
                     Projeto desenvolvido para disciplina Gerência de Projetos, do curso de Sistemas de Informação da FACCAT.
-                    A finalidade é educacional, para trabalhar aspectos de organização e estruturação de um projeto completo.
+                    A finalidade é educacional, para desenvolver aspectos de organização e estrutura de um projeto completo.
                 </p>
 
                 <hr>

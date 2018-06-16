@@ -1,4 +1,4 @@
-## World Cup App
+## World Cup Web App
 
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/lYah1Uqw37XdicC6C4HNqg_48x48.png)
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/5Y6kOqiOIv2C1sP9C_BWtA_48x48.png)
@@ -16,6 +16,22 @@
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/9toerdOg8xW4CRhDaZxsyw_48x48.png)
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/QSlAlD9v6Fm_drC_2z1u8A_48x48.png)
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/2vpR8clrEZdpNjaiHKpg7A_48x48.png)
+
+This is the new application to organize your bets in an agile and easy way.
+
+Create groups, compare the results and have fun!
+
+##### Scoring Rules:
+
+3 points for hit the mark (match - A)  
+1 point for correct situation of the match but different results (almost - Q)
+
+This web application was for you can bet on the results of the 2018 World Cup rescue games, with the possibility to gather your friends in groups of bets and, with simple and fun, compete in the ranking from the score of the results.
+
+Don't waste time!
+
+Project developed for the Project Management discipline, undergraduate in Information Systems at FACCAT. With educational objective, to develop the organization and structure into a complete project.
+
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/zKLzoJVYz0bb6oAnPUdwWQ_48x48.png)
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/ixZiM5pj2IvvYc15k-zfeQ_48x48.png)
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/xyh1vmZ-xJH2iJCKjqS1Ow_48x48.png)
@@ -32,8 +48,3 @@
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/by4OltvtZz7taxuQtkiP3A_48x48.png)
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/yTS_Piy3M1wUBnqU0n5aAw_48x48.png)
 ![alt text](https://ssl.gstatic.com/onebox/media/sports/logos/zw3ac5sIbH4DS6zP5auOkQ_48x48.png)
-
-This is the new application to organize your bets in an agile and easy way.
-Create groups, compare the results and have fun!
-
-In process of development.
