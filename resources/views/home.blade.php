@@ -24,6 +24,7 @@
                         @php
                             $date = str_replace( '-', ' ', $match->match_date );
                             $date = str_replace( '/', '-', $date );
+                            $date_scoreboard = date( 'd-m-Y H:i', strtotime( '+1 minute', strtotime( $date )));
                             $date = date( 'd-m-Y H:i', strtotime( '+240 minute', strtotime( $date )));
                         @endphp
                         <div class="panel-matches"
@@ -81,7 +82,7 @@
                                 </span>
                             </div>
 
-                            @if ( $date < $date_now )
+                            @if ( $date_scoreboard < $date_now )
                                 <div class="panel-matches-mat padtop-1">
                                     <span>
                                         <div>
