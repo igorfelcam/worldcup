@@ -24,6 +24,7 @@
                         @php
                             $date = str_replace( '-', ' ', $match->match_date );
                             $date = str_replace( '/', '-', $date );
+                            $date_bet = date( 'd-m-Y H:i', strtotime( '-120 minute', strtotime( $date )));
                             $date_scoreboard = date( 'd-m-Y H:i', strtotime( '+1 minute', strtotime( $date )));
                             $date = date( 'd-m-Y H:i', strtotime( '+240 minute', strtotime( $date )));
                         @endphp
@@ -51,25 +52,33 @@
                                     <img width="28" height="28" src="{{ $match->flag_a }}" alt="">
                                 </span>
                                 <span>
-                                    <input class="form-control goal"
-                                        id="{{ $match->match_id }}"
-                                        type="text"
-                                        name="team_first"
-                                        @keyup="enterBet"
-                                        value="{{ $match->bet_first_team_goals }}"
-                                    >
+                                    @if ( $date_bet < $date_now )
+                                        {{ $match->bet_first_team_goals }}
+                                    @else
+                                        <input class="form-control goal"
+                                            id="{{ $match->match_id }}"
+                                            type="text"
+                                            name="team_first"
+                                            @keyup="enterBet"
+                                            value="{{ $match->bet_first_team_goals }}"
+                                        >
+                                    @endif
                                 </span>
                                 <span>
                                     &#10006;
                                 </span>
                                 <span>
-                                    <input class="form-control goal"
-                                        id="{{ $match->match_id }}"
-                                        type="text"
-                                        name="team_second"
-                                        @keyup="enterBet"
-                                        value="{{ $match->bet_second_team_goals }}"
-                                    >
+                                    @if ( $date_bet < $date_now )
+                                        {{ $match->bet_second_team_goals }}
+                                    @else
+                                        <input class="form-control goal"
+                                            id="{{ $match->match_id }}"
+                                            type="text"
+                                            name="team_second"
+                                            @keyup="enterBet"
+                                            value="{{ $match->bet_second_team_goals }}"
+                                        >
+                                    @endif
                                 </span>
                                 <span>
                                     <img width="28" height="28" src="{{ $match->flag_b }}" alt="">
