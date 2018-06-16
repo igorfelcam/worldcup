@@ -122,6 +122,45 @@ class HomeController extends Controller
     */
     public function pageInformation()
     {
-        return view('information');
+        $top_five = DB::table( 'users as usr' )
+                        ->select(
+                            'usr.username as user_name',
+                            'usr.total_score as total_score',
+                            DB::raw( 'case when a.hit_the_mark is null then 0 else a.hit_the_mark end as hit_the_mark' ),
+                            DB::raw( 'case when b.almost_hit is null then 0 else b.almost_hit end as almost_hit' )
+                            )
+                            ->leftJoin( DB::raw(
+                                        '(select
+                                        htm.user_id as user_id,
+                                        count(*) as hit_the_mark
+                                        from bets as htm
+                                        where htm.score = 3
+                                        group by htm.user_id) as a'
+                                    ),
+                                    function( $join )
+                                    {
+                                        $join->on( 'usr.id', '=', 'a.user_id' );
+                                    }
+                                )
+                            ->leftJoin( DB::raw(
+                                        '(select
+                                        alh.user_id as user_id,
+                                        count(*) as almost_hit
+                                        from bets as alh
+                                        where alh.score = 1
+                                        group by alh.user_id) as b'
+                                    ),
+                                    function( $join )
+                                    {
+                                        $join->on(  'usr.id', '=', 'b.user_id' );
+                                    }
+                                )
+                            ->orderBy( 'usr.total_score', 'desc' )
+                            ->orderBy( 'a.hit_the_mark', 'desc' )
+                            ->orderBy( 'b.almost_hit', 'desc' )
+                            ->limit( 5 )
+                            ->get();
+
+        return view('information')->with( 'top_five', $top_five );
     }
 }

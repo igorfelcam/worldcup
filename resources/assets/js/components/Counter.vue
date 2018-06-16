@@ -27,7 +27,7 @@ export default {
 
             dias = parseInt(segundoF / 86400) - 30
             if ( dias >= 0 ) {
-                dias = dias > 0 ? dias + ' dias e ' : ''
+                dias = dias > 0 ? dias + ' d e ' : ''
 
                 segundoF = segundoF % 86400
                 horas = parseInt(segundoF / 3600)
@@ -39,7 +39,7 @@ export default {
                 self.datetime = dias + ('00' + horas).slice(-2) + ':' + ('00' + minutos).slice(-2) + ':' + ('00' + segundos).slice(-2)
             }
             else {
-                self.datetime = 'Aposta encerrada'
+                self.datetime = 'Aposta enc.'
             }
         }, 1000)
     }

@@ -9,9 +9,32 @@
             <div class="fntsz12">
                 <div class="mag-2">
                     <div class="text-center"><b>Regras de pontuação:</b></div>
-                    <div class="text-center">3 pontos para acertos exatos dos placares da partida</div>
-                    <div class="text-center">1 ponto para acertos da situação do jogo mas com resultados diferentes</div>
+                    <div class="text-center">3 pontos para acertos exatos dos placares da partida (acerto - A)</div>
+                    <div class="text-center">1 ponto para acertos da situação do jogo mas com resultados diferentes (quase - Q)</div>
                 </div>
+
+                <hr>
+
+                <div class="mag-2">
+                    <div class="text-center"><b>5 maiores pontuadores</b></div>
+                    <div class="top-five">
+                        @php $aux = 0; @endphp
+                        <div class="pos"></div>
+                        <div class="us-top"></div>
+                        <div class="sc-top fntsz10">A</div>
+                        <div class="sc-top fntsz10">Q</div>
+                        <div class="sc-top fntsz10"><b>T</b></div>
+                        @foreach ( $top_five as $top )
+                            <div class="pos"><b>{{ $aux = $aux + 1 }}º</b></div>
+                            <div class="us-top">{{ $top->user_name }}</div>
+                            <div class="sc-top">{{ $top->hit_the_mark }}</div>
+                            <div class="sc-top">{{ $top->almost_hit }}</div>
+                            <div class="sc-top"><b>{{ $top->total_score }}</b></div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <hr>
 
                 <div class="text-justify mag-2">
                     Este app web foi feito para que você possa apostar nos resultados dos jogos da copa do mundo
@@ -25,11 +48,14 @@
                     </p>
                 </p>
 
+                <hr>
 
                 <p class="text-justify mag-2">
                     Projeto desenvolvido para disciplina Gerência de Projetos, do curso de Sistemas de Informação da FACCAT.
                     A finalidade é educacional, para trabalhar aspectos de organização e estruturação de um projeto completo.
                 </p>
+
+                <hr>
 
                 <p class="text-center">
                     <a class="badge badge-light pad-lk" href="https://github.com/IgorCamargo/worldcup" target="_blank">
@@ -38,7 +64,6 @@
                     </a>
                 </p>
             </div>
-
 
         </div>
     </div>

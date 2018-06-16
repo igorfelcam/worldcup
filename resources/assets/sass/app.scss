@@ -11,6 +11,7 @@
 .fntsz26 { font-size: 26px; }
 .fntsz18 { font-size: 18px; }
 .fntsz12 { font-size: 12px; }
+.fntsz10 { font-size: 10px; }
 .padtop-1 {
     padding-top: 1em;
     font-weight: bold;
@@ -300,4 +301,18 @@ footer {
 }
 .pad-lk {
     padding: 4px 6px;
+}
+.top-five {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    & .pos, .sc-top {
+        display: inline-flex;
+        width: 7%;
+    }
+    & .sc-top { width: 12%; }
+    & .us-top {
+        display: inline-flex;
+        width: 52%;
+    }
 }
